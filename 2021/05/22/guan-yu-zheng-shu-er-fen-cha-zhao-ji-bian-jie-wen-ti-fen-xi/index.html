@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Hello World, LittleY&#39;Blog">
+    <meta name="keywords" content="关于整数二分查找及边界问题分析, LittleY&#39;Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | LittleY&#39;Blog</title>
+    <title>关于整数二分查找及边界问题分析 | LittleY&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">关于整数二分查找及边界问题分析</h1>
                 </div>
             </div>
         </div>
@@ -467,19 +467,190 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="关于整数二分查找及边界问题分析"><a href="#关于整数二分查找及边界问题分析" class="headerlink" title="关于整数二分查找及边界问题分析"></a>关于整数二分查找及边界问题分析</h2><p><strong>二分查找</strong>属于分治算法。</p>
+<p>所谓的二分算法,就是我们知道当前的候选区间中,一定存在我们要找到的答案,而且我们发现这个区间拥有单调性质此类的性质,那么我们可以不停地缩减候选区间的范围,达到排除无用答案的效果.</p>
+<h3 id="算法模板"><a href="#算法模板" class="headerlink" title="算法模板"></a>算法模板</h3><h4 id="寻找右分界点"><a href="#寻找右分界点" class="headerlink" title="寻找右分界点"></a>寻找右分界点</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int bsearch_1(int l, int r)
+&#123;
+    &#x2F;&#x2F;第二步：递归处理子问题，用while循环来实现
+    while (l &lt; r)
+    &#123;
+    &#x2F;&#x2F;第一步：分解成子问题,这是二分的核心--范围减半
+        int mid &#x3D; l + r &gt;&gt; 1;
+        if (check(mid)) r &#x3D; mid;    &#x2F;&#x2F;向左边找 if判断mid是否满足性质，注意该性质会划分数组的右边部分
+        else l &#x3D; mid + 1;           &#x2F;&#x2F;向右边找
+    &#125;
+    &#x2F;&#x2F;第三步：合并子问题.对二分算法来说，不需要这一步
+    return l;   &#x2F;&#x2F;l就是寻找的右分界点,如果数组中没有要找的点，l的值就是r,但这是一个错误答案
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="寻找左分界点"><a href="#寻找左分界点" class="headerlink" title="寻找左分界点"></a>寻找左分界点</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int bsearch_2(int l, int r)
+&#123;
+    while (l &lt; r)
+    &#123;
+        int mid &#x3D; l + r + 1 &gt;&gt; 1;   &#x2F;&#x2F; mid 向上取整
+        if (check(mid)) l &#x3D; mid;
+        else r &#x3D; mid - 1;
+    &#125;
+    return l;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="待证问题：循环结束后的l就是要找的点-默认包含答案"><a href="#待证问题：循环结束后的l就是要找的点-默认包含答案" class="headerlink" title="待证问题：循环结束后的l就是要找的点(默认包含答案)"></a><strong>待证问题：</strong>循环结束后的l就是要找的点(默认包含答案)</h4><p><strong>循环不变式</strong>：<code>[l..r]</code>中包含答案点<code>res</code></p>
+<ol>
+<li><p><strong>初始</strong></p>
+<p>显然<code>[l..r]</code>包含答案点<code>res</code></p>
+</li>
+<li><p><strong>保持</strong></p>
+<p>假设某轮循环开始之前,<code>[l..r]</code>包含答案点<code>res</code></p>
+<p>执行循环体</p>
+<p><code>int mid = l + r &gt;&gt; 1 mid</code>是向下取整得到的</p>
+<p>if语句分支1：</p>
+<p>如果<code>mid</code>满足性质，那么说明<code>res</code>在<code>[l..mid]</code>间(包括<code>mid</code>本身),令 <code>r = mid</code></p>
+<p>if语句分支2：</p>
+<p>如果 <code>mid </code>不满足性质，说明<code>mid</code>在左边部分，<code>res</code>在<code>[mid+1..r]</code>间,令<code>l = mid + 1</code></p>
+<p>∴ <code>l</code>和<code>r</code>更新之后，下一轮循环开始之前，循环不变式依然成立</p>
+</li>
+<li><p><strong>终止</strong></p>
+<p>循环终止时， <code>l &gt;= r</code></p>
+<p>易知 <code>l</code>不可能比 <code>r </code>大 , 故<code> l = r</code></p>
+<p>∴ 根据循环不变式，<code>l</code>是答案点 <code>res</code></p>
+</li>
+</ol>
+<h3 id="边界分析"><a href="#边界分析" class="headerlink" title="边界分析"></a>边界分析</h3><p><strong>问题：</strong>为什么 mid 是向下取整得到的，即 mid = l + r &gt;&gt; 1. 而不是向上取整,即 mid = l + r + 1 &gt;&gt; 1</p>
+<p><strong>答：</strong>mid向下取整是为了缩小范围，避免造成无限划分</p>
+<h4 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h4><p>if语句分支1： r = mid = l + r &gt;&gt; 1 (向下取整) 一定小于原来的 r</p>
+<p>if语句分支2： l = mid + 1 一定大于原来的 l</p>
+<p>所以，mid向下取整的话，就不会造成无限划分</p>
+<blockquote>
+<p> 注：对于二分的另一种情况，即寻找左分界点, mid就需要向上取整了</p>
+</blockquote>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个按照升序排列的长度为n的整数数组，以及 q 个查询。</p>
+<p>对于每个查询，返回一个元素k的起始位置和终止位置（位置从0开始计数）。</p>
+<p>如果数组中不存在该元素，则返回“-1 -1”。</p>
+<p><strong>输入格式</strong><br>第一行包含整数n和q，表示数组长度和询问个数。</p>
+<p>第二行包含n个整数（均在1~1000010000范围内），表示完整数组。</p>
+<p>接下来q行，每行包含一个整数k，表示一个询问元素。</p>
+<p><strong>输出格式</strong><br>共q行，每行包含两个整数，表示所求元素的起始位置和终止位置。</p>
+<p>如果数组中不存在该元素，则返回“-1 -1”。</p>
+<p><strong>数据范围</strong><br>1≤n≤1000001≤n≤100000<br>1≤q≤100001≤q≤10000<br>1≤k≤10000</p>
+<p><strong>输入样例</strong>：</p>
+<blockquote>
+<p>6 3<br>1 2 2 3 3 4<br>3<br>4<br>5</p>
+</blockquote>
+<p><strong>输出样例</strong>：</p>
+<blockquote>
+<p>3 4<br>5 5<br>-1 -1</p>
+</blockquote>
+<h4 id="审题"><a href="#审题" class="headerlink" title="审题"></a>审题</h4><p>在一个范围内,查找一个数字,要求找到这个元素的起始位置和结束位置,请注意这个范围内的数字都是单调递增的,即具有单调性质.</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p><strong>C++:</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+using namespace std;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+const int N &#x3D; 100010;
+
+int n, m;
+int q[N];
+
+int main()
+&#123;
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+    for (int i &#x3D; 0; i &lt; n; i ++ ) scanf(&quot;%d&quot;, &amp;q[i]);
+
+    while (m -- )
+    &#123;
+        int target;
+        scanf(&quot;%d&quot;,&amp;target);
+
+        int l &#x3D; 0,r &#x3D; n-1;
+        while (l &lt; r)
+        &#123;
+            int mid &#x3D; l + r &gt;&gt; 1;
+            if (q[mid] &gt;&#x3D; target) r &#x3D; mid;
+            else l &#x3D; mid + 1;
+        &#125;
+
+        if(q[l] !&#x3D; target) cout &lt;&lt; &quot;-1 -1&quot; &lt;&lt; endl;
+        else
+        &#123;
+            cout &lt;&lt; l &lt;&lt; &#39; &#39;;
+
+            int l &#x3D; 0, r &#x3D; n - 1;
+            while (l &lt; r)
+            &#123;
+                int mid &#x3D; l + r + 1 &gt;&gt; 1;
+
+                if (q[mid] &lt;&#x3D; target) l &#x3D; mid;
+                else r &#x3D; mid - 1;
+            &#125;
+            cout &lt;&lt; l &lt;&lt; endl;
+        &#125;
+    &#125;
+    return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Java:</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @program: BinSearch01
+ * @description: TODO
+ * @author: yangxun199807@163.com
+ * @create: 2020-11-06 12:51
+ */</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//数组长度</span>
+        <span class="token keyword">int</span> q <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//询问个数</span>
+
+        <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> q<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">binSearch</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">binSearch</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> l <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> r <span class="token operator">=</span> arr<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> target <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>l <span class="token operator">&lt;</span> r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> mid <span class="token operator">=</span> l <span class="token operator">+</span> r <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>target <span class="token operator">&lt;=</span> arr<span class="token punctuation">[</span>mid<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                r <span class="token operator">=</span> mid<span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                l <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>l<span class="token punctuation">]</span> <span class="token operator">!=</span> target<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"-1 -1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>l <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+
+        l <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        r <span class="token operator">=</span> arr<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>l <span class="token operator">&lt;</span> r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> mid <span class="token operator">=</span> l <span class="token operator">+</span> r <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> target<span class="token punctuation">)</span>
+                l <span class="token operator">=</span> mid<span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                r <span class="token operator">=</span> mid <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -506,7 +677,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/05/22/hello-world/">http://example.com/2021/05/22/hello-world/</a>
+                    <a href="http://example.com/2021/05/22/guan-yu-zheng-shu-er-fen-cha-zhao-ji-bian-jie-wen-ti-fen-xi/">http://example.com/2021/05/22/guan-yu-zheng-shu-er-fen-cha-zhao-ji-bian-jie-wen-ti-fen-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,13 +888,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/dui-xiang-yi-si-ma/">
+                <a href="/2021/05/22/git-ming-ling-ji-he/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象已死吗">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Git命令集合">
                         
-                        <span class="card-title">对象已死吗</span>
+                        <span class="card-title">Git命令集合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -754,13 +925,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/21/springboot-zi-ding-yi-yi-chang-shi-tu/">
+                <a href="/2021/05/22/jvm-tan-jiu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SpringBoot自定义异常视图">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="JVM探究">
                         
-                        <span class="card-title">SpringBoot自定义异常视图</span>
+                        <span class="card-title">JVM探究</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -771,7 +942,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
                             </span>
                         <span class="publish-author">
                             

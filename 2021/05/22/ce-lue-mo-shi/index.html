@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Hello World, LittleY&#39;Blog">
+    <meta name="keywords" content="策略模式(Stratagy), LittleY&#39;Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | LittleY&#39;Blog</title>
+    <title>策略模式(Stratagy) | LittleY&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">策略模式(Stratagy)</h1>
                 </div>
             </div>
         </div>
@@ -467,19 +467,71 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="策略模式-Stratagy"><a href="#策略模式-Stratagy" class="headerlink" title="策略模式(Stratagy)"></a>策略模式(Stratagy)</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>策略模式 定义一系列算法，把他们独立封装起来，并且这些算法之间可以相互替换。策略模式主要是管理一堆有共性的算法，策略模式让算法独立于使用它的客户而变化，客户端可以根据需要，很快切换这些算法，并且保持可扩展性。</p>
+<p>比如说，我有一个排序方法，但是这个排序的规则有好几种，比如说，针对一个实体类的id进行排序，也可以针对实体类的age进行排序等等还多中规则，这些规则我都是可以随时替换的。而策略模式就是来处理这一类问题。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>优点</strong>：</p>
+<ol>
+<li>多重条件语句不易维护，而使用策略模式可以避免使用多重条件语句。</li>
+<li>策略模式提供了一系列的可供重用的算法族，恰当使用继承可以把算法族的公共代码转移到父类里面，从而避免重复的代码。</li>
+<li>策略模式可以提供相同行为的不同实现，客户可以根据不同时间或空间要求选择不同的。</li>
+<li>策略模式提供了对开闭原则的完美支持，可以在不修改原代码的情况下，灵活增加新算法。</li>
+<li>策略模式把算法的使用放到环境类中，而算法的实现移到具体策略类中，实现了二者的分离。</li>
+</ol>
+<p><strong>缺点</strong>：</p>
+<p>​    策略模式造成很多的策略类。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>策略模式的原理图如下：</p>
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717122627259.png" alt="image-20200717122627259" style="zoom:67%;" />
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol>
+<li>Strategy类：定义了一个公共接口，各种不同的算法以不同的方式实现这个接口，环境角色使用这个接口调用不同的算法。</li>
+<li>Concrete Strategy类：实现了抽象策略定义的接口，也就是真正干活的类</li>
+<li>Context类：持有一个策略类的引用，最终给客户端调用</li>
+</ol>
+<p><strong>注意</strong>：Context也叫Context封装角色，起承上启下的作用，屏蔽高层模块对策略、算法的直接访问，封装可能存在的变化。</p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>此时要开发一款软件，可以使用Java，也可以使用PHP，这两个语言属于两个策略。现在使用策略模式来实现这个问题。</p>
+<ol>
+<li><p>抽象语言类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">CodeLanguage</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">void</span> <span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>具体语言类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CodeJava</span> <span class="token keyword">implements</span> <span class="token class-name">CodeLanguage</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"使用Java语言编程"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CodePhp</span> <span class="token keyword">implements</span> <span class="token class-name">CodeLanguage</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"使用Php语言编程"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>策略引用类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CodeContext</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">CodeLanguage</span> codeLanguage<span class="token punctuation">;</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <span class="token keyword">public</span> <span class="token class-name">CodeContext1</span><span class="token punctuation">(</span><span class="token class-name">CodeLanguage</span> codeLanguage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>codeLanguage <span class="token operator">=</span> codeLanguage<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <span class="token keyword">void</span> <span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        codeLanguage<span class="token punctuation">.</span><span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>使用模式</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">CodeContext</span> context<span class="token punctuation">;</span>
+        context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CodeContext</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CodeJava</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span><span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CodeContext</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CodePhp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span><span class="token function">useLanguage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<p>此时，这个模型就已经用代码表示出来了，此时我们也不难发现，如果现在需要再增加一种策略的话，只需要新建一个CodeLanguage的实现类就可以了，在使用的时候可以直接调用策略。体现了它的扩展性</p>
 
                 
             </div>
@@ -506,7 +558,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/05/22/hello-world/">http://example.com/2021/05/22/hello-world/</a>
+                    <a href="http://example.com/2021/05/22/ce-lue-mo-shi/">http://example.com/2021/05/22/ce-lue-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,13 +769,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/dui-xiang-yi-si-ma/">
+                <a href="/2021/05/22/la-ji-hui-shou-suan-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象已死吗">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="垃圾回收算法">
                         
-                        <span class="card-title">对象已死吗</span>
+                        <span class="card-title">垃圾回收算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -754,13 +806,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/21/springboot-zi-ding-yi-yi-chang-shi-tu/">
+                <a href="/2021/05/22/dong-tai-dai-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SpringBoot自定义异常视图">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="动态代理（Dynamic Proxy）">
                         
-                        <span class="card-title">SpringBoot自定义异常视图</span>
+                        <span class="card-title">动态代理（Dynamic Proxy）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -771,7 +823,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
                             </span>
                         <span class="publish-author">
                             

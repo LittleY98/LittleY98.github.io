@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Hello World, LittleY&#39;Blog">
+    <meta name="keywords" content="对象已死吗, LittleY&#39;Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | LittleY&#39;Blog</title>
+    <title>对象已死吗 | LittleY&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">对象已死吗</h1>
                 </div>
             </div>
         </div>
@@ -467,19 +467,38 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="对象已死吗？"><a href="#对象已死吗？" class="headerlink" title="对象已死吗？"></a>对象已死吗？</h2><p>Java Heap中存放着几乎所有的对象实例，垃圾回收前，最重要的事就是判断是对象是否存活（还在被引用的对象）。</p>
+<h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1. 引用计数法"></a>1. 引用计数法</h3><p>给对象添加一个引用计数器,每一个地方引用它,计数器值就加1，对象引用失效的时候,计数器就减1.计数器值为0的时候,此对象为垃圾。</p>
+<p><strong>优点</strong>：判定效率高</p>
+<p><strong>缺点</strong>:如果对象间循环依赖,此算法无法正确判断是否为垃圾对象。因此主流虚拟机都没有用这种算法。</p>
+<p><strong>循环依赖</strong>如下图所示：</p>
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200718161104467.png" alt="image-20200718161104467" style="zoom:67%;" />
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2. 可达性分析算法"></a>2. 可达性分析算法</h3><p>目前主流的JVM都是用的可达性分析算法来判断对象是否存货的。</p>
+<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p><code>GC Roots</code>的对象作为起始点从这些节点开始向下搜索,搜索所走过的路径称为引用链(Reference Chain)当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可达的。如下图：</p>
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200718161711008.png" alt="image-20200718161711008" style="zoom:67%;" />
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>图中黄色的对象仍然存活，灰色的显然是不可达的，即为可回收的对象。</p>
+<h4 id="可作为GC-Root对象的包括"><a href="#可作为GC-Root对象的包括" class="headerlink" title="可作为GC Root对象的包括"></a>可作为GC Root对象的包括</h4><ol>
+<li>栈帧中本地变量表中引用的对象</li>
+<li>方法区类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>方法栈JNI引用的对象</li>
+</ol>
+<h4 id="关于引用（强软弱虚）"><a href="#关于引用（强软弱虚）" class="headerlink" title="关于引用（强软弱虚）"></a>关于引用（强软弱虚）</h4><p><strong>强引用</strong>：类似于<code>Object obj = new Object()</code>这种的就属于强引用，只要强引用存在，就永远不会被回收。</p>
+<p><strong>软引用</strong>：有用，但是非必须的对象。对于这些软引用关联的对象，在要发生内存异常前，将会把他们列到回收范围中进行GC，如果内存依然不够，才会报内存溢出异常。</p>
+<p><strong>弱引用</strong>：非必须对象，被若引用关联的对象只能生存到下一次GC发生之前。当开始GC时，无论内存是否够用，都会回收。</p>
+<p><strong>虚引用</strong>：最弱的一种引用关系，一个对象是否有虚引用，完全不影响其生存时间，，也无法通过虚引用来取得一个对象实例。为对象设置虚引用的唯一目的就是能在这个对象被回收时，收到一个系统通知。</p>
+<h3 id="3-不可达对象是否死亡判断"><a href="#3-不可达对象是否死亡判断" class="headerlink" title="3. 不可达对象是否死亡判断"></a>3. 不可达对象是否死亡判断</h3><p>当对象不可达GC Roots时，将会对其进行第一次筛选，如果其未覆盖<code>finalize()</code>方法或者已经调用过一次<code>finalize()</code>方法的话，讲直接将其回收。否则，将会给其一个逃脱死亡命运的机会，并对其标记。如果到第二次GC时，它还没有被引用的话，那将会被直接回收。</p>
+<h3 id="4-Method-Area的回收"><a href="#4-Method-Area的回收" class="headerlink" title="4. Method Area的回收"></a>4. Method Area的回收</h3><p>此区域的垃圾回收效率较低。</p>
+<p>一般回收两部分内容，即：<strong>废弃常量</strong>和<strong>无用的类</strong>。</p>
+<p><strong>废弃常量</strong>：如果无任何地方引用此常量，那么它讲在下一次GC时被回收。</p>
+<p><strong>无用的类</strong>：需要同时达到以下三个条件:</p>
+<ol>
+<li>该类所有实例都被回收</li>
+<li>加载该类的ClassLoader被回收</li>
+<li>该类对应的class对象没有被引用,无法在任何地方反射访问该类方法</li>
+</ol>
 
                 
             </div>
@@ -506,7 +525,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/05/22/hello-world/">http://example.com/2021/05/22/hello-world/</a>
+                    <a href="http://example.com/2021/05/22/dui-xiang-yi-si-ma/">http://example.com/2021/05/22/dui-xiang-yi-si-ma/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,13 +736,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/dui-xiang-yi-si-ma/">
+                <a href="/2021/05/22/jing-tai-dai-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象已死吗">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="静态代理模式（Static Proxy）">
                         
-                        <span class="card-title">对象已死吗</span>
+                        <span class="card-title">静态代理模式（Static Proxy）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -754,13 +773,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/21/springboot-zi-ding-yi-yi-chang-shi-tu/">
+                <a href="/2021/05/22/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SpringBoot自定义异常视图">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">SpringBoot自定义异常视图</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -771,7 +790,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
                             </span>
                         <span class="publish-author">
                             

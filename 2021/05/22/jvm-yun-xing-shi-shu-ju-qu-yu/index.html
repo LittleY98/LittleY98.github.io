@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Hello World, LittleY&#39;Blog">
+    <meta name="keywords" content="JVM运行时数据区域, LittleY&#39;Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | LittleY&#39;Blog</title>
+    <title>JVM运行时数据区域 | LittleY&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -315,7 +315,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">JVM运行时数据区域</h1>
                 </div>
             </div>
         </div>
@@ -467,19 +467,59 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><h3 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h3><p>图中灰色区域即为运行时数据区</p>
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/5f129c60e0b34d44f050be92.png" style="zoom: 67%;" />
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="1-Program-Counter-Register（PCR）"><a href="#1-Program-Counter-Register（PCR）" class="headerlink" title="1. Program Counter Register（PCR）"></a>1. Program Counter Register（PCR）</h3><p>程序计数器。内存较小，是当前线程所执行的字节码的行号指示器。字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令。</p>
+<p>线程私有，各个县城之间的计数器互不影响，独立存储。</p>
+<p>如果线程正在执行的是一个Java方法，则记录的是正在执行的虚拟机字节码指令的地址；如果执行的是Native方法，计数器的值为空。</p>
+<p>至内存区域是唯一一个在JVM中没有规定任何OOM（OutOfMemoryError）情况的区域。</p>
+<h3 id="2-JVM-Stack"><a href="#2-JVM-Stack" class="headerlink" title="2. JVM Stack"></a>2. JVM Stack</h3><p>线程私有，生命周期与线程相同。</p>
+<p>每个方法执行是都会创建一个栈帧（Stack Frame），栈帧包括如下：</p>
+<ol>
+<li>局部变量表<ul>
+<li>存放编译器可知的8种基本数据类型以及对象引用类型(reference)</li>
+<li>其中64位长度的long和double类型会占两个Slot，其余的只占一个</li>
+<li>局部变量表所需内存在编译期间就一完成分配</li>
+</ul>
+</li>
+<li>操作数栈</li>
+<li>动态链接</li>
+<li>返回地址</li>
+<li>方法出口</li>
+<li>异常情况<ul>
+<li>StackOverFlowError</li>
+<li>OutOfMemoryError</li>
+</ul>
+</li>
+<li>…</li>
+</ol>
+<h3 id="3-Naive-Method-Stack"><a href="#3-Naive-Method-Stack" class="headerlink" title="3. Naive Method Stack"></a>3. Naive Method Stack</h3><p>线程私有，执行的是Native方法。异常情况与JVM Stack相同。</p>
+<p><strong>关于Native方法</strong>:</p>
+<blockquote>
+<p>A native method is a Java method whose implementation is provided by non-java code.</p>
+</blockquote>
+<p>意思就是Native方法就是该方法的实现是由其他语言实现，而并非Java。在Java诞生的时候，还是C和C++的天下，Java一方面为了迎合市场，一方面为了弥补Java的不足，便有了这个机制。</p>
+<h3 id="4-Java-Heap"><a href="#4-Java-Heap" class="headerlink" title="4. Java Heap"></a>4. Java Heap</h3><p>Java Heap是JVM种占内存最大的一块。此内存区域线程共享。在虚拟机启动时创建。</p>
+<p>此内存作用就是用来存储对象实例。因此它也是GC的重点区域。</p>
+<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>Java Heap的内部还根据内存回收的角度，对其区域进行分代：</p>
+<ol>
+<li>新生代<ul>
+<li>Eden区</li>
+<li>From Survivor空间（S1区）</li>
+<li>To Survivor空间（S2区）</li>
+</ul>
+</li>
+<li>老年代</li>
+</ol>
+<p>从内存分配的角度看，线程共享的堆中坑划分出多个线程私有的TLAB（Thread Local Allocation Buffer），即内存缓冲区。</p>
+<p>在物理内存中，Java Heap是不连续的内存空间，只要逻辑上是连续的即可。</p>
+<h3 id="5-Method-Area"><a href="#5-Method-Area" class="headerlink" title="5. Method Area"></a>5. Method Area</h3><h4 id="关于永久代和元空间、方法区的区别"><a href="#关于永久代和元空间、方法区的区别" class="headerlink" title="关于永久代和元空间、方法区的区别"></a>关于永久代和元空间、方法区的区别</h4><p>方法区属于JVM规范中的定义，而永久代是一种实现。也就是说方法区属于一个标准，而永久代是HotSpot对于这个标准的实现。在Java8之后，HotSpot进行了“去永久代”，把永久代取消，取而代之的是元空间。</p>
+<p>而元空间和永久代的区别在于存储位置的不同，永久代在物理上是堆的一部分和新生代，老年代的存储地址是连续的，只是在逻辑上不是(当时也被称作 Non Heap Memory)；而元空间属于本地内存。还有一点就是在存储的内容不同，元空间用来准出类的元信息，而静态变量和常量池被并入到了Java Heap中。可以理解为，永久代的数据被分到了Java Heap和元空间中。</p>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>用于存储被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<h3 id="6-Runtime-Constant-Pool（运行时常量池）"><a href="#6-Runtime-Constant-Pool（运行时常量池）" class="headerlink" title="6.  Runtime Constant Pool（运行时常量池）"></a>6.  Runtime Constant Pool（运行时常量池）</h3><p> 运行时常量池是方法区的一部分，是一块内存区域。运行时常量池将在类加载后进入方法区的运行时常量池中存放。一个类加载到 JVM 中后对应一个运行时常量池，运行时常量池相对于 Class 文件常量池来说具备动态性，Class 文件常量只是一个静态存储结构，里面的引用都是符号引用。而运行时常量池可以在运行期间将符号引用解析为直接引用。可以说运行时常量池就是用来索引和查找字段和方法名称和描述符的。给定任意一个方法或字段的索引，通过这个索引最终可得到该方法或字段所属的类型信息和名称及描述符信息，这涉及到方法的调用和字段获取。</p>
+<h3 id="7-Direct-Memory（直接内存）"><a href="#7-Direct-Memory（直接内存）" class="headerlink" title="7. Direct Memory（直接内存）"></a>7. Direct Memory（直接内存）</h3><p>一般是NIO类（New Input/Output）使用这块内存较多。</p>
+<p>此内存区域并不属于运行时数据区，也不是JVM规范中定义的内存区域，因此，它只有可能出现OutOfMemoryError。</p>
 
                 
             </div>
@@ -506,7 +546,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/05/22/hello-world/">http://example.com/2021/05/22/hello-world/</a>
+                    <a href="http://example.com/2021/05/22/jvm-yun-xing-shi-shu-ju-qu-yu/">http://example.com/2021/05/22/jvm-yun-xing-shi-shu-ju-qu-yu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,13 +757,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/dui-xiang-yi-si-ma/">
+                <a href="/2021/05/22/jvm-tan-jiu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象已死吗">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="JVM探究">
                         
-                        <span class="card-title">对象已死吗</span>
+                        <span class="card-title">JVM探究</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -754,13 +794,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/21/springboot-zi-ding-yi-yi-chang-shi-tu/">
+                <a href="/2021/05/22/nei-cun-fen-pei-yu-hui-shou-ce-lue/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SpringBoot自定义异常视图">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="内存分配与回收策略">
                         
-                        <span class="card-title">SpringBoot自定义异常视图</span>
+                        <span class="card-title">内存分配与回收策略</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -771,7 +811,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
                             </span>
                         <span class="publish-author">
                             

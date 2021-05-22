@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Hello World, LittleY&#39;Blog">
+    <meta name="keywords" content="Git命令集合, LittleY&#39;Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | LittleY&#39;Blog</title>
+    <title>Git命令集合 | LittleY&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Git命令集合</h1>
                 </div>
             </div>
         </div>
@@ -467,19 +467,47 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="Git命令集合"><a href="#Git命令集合" class="headerlink" title="Git命令集合"></a>Git命令集合</h2><h3 id="1-提前配置"><a href="#1-提前配置" class="headerlink" title="1. 提前配置"></a>1. 提前配置</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git config --global user.name USERNAME		#配置用户名
+git config --global user.email USEREMAIL	#配置用户邮箱<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-提交步骤"><a href="#2-提交步骤" class="headerlink" title="2. 提交步骤"></a>2. 提交步骤</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git init			#初始化git仓库
+git status			#查看文件状态
+git add				#添加到缓存区，追踪文件
+git commit -m MESSAGE		#提交信息，向仓库中提交代码
+git log 			#查看提交记录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="3-Git撤销"><a href="#3-Git撤销" class="headerlink" title="3. Git撤销"></a>3. Git撤销</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git checkout FILENAME		#用暂存区的文件覆盖工作目录中的文件
+git rm --cached FILENAME	#将文件从暂存区删除
+git reset --hard COMMITID	#将git仓库中指定的更新记录恢复出来，并覆盖暂存区和工作目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="4-Git分支"><a href="#4-Git分支" class="headerlink" title="4. Git分支"></a>4. Git分支</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git branch			#查看分支
+git branch 分支名称		#创建分支
+git checkout 分支名称	#切换分支
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+git merge 来源分支		#合并分支
+
+git branch -d 分支名称		#删除分支（分支被合并后才允许被删除）		（-D代表强制删除）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-暂时保存更改"><a href="#5-暂时保存更改" class="headerlink" title="5. 暂时保存更改"></a>5. 暂时保存更改</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git stash 		#存储临时改动
+git stash pop	#恢复改动<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="6-推送到远程仓库"><a href="#6-推送到远程仓库" class="headerlink" title="6. 推送到远程仓库"></a>6. 推送到远程仓库</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git push 远程仓库地址 分支名称		#将当前分支推送到远端仓库的指定点分支中
+git push 远程仓库地址别名 分支名称
+git push -u 远程仓库地址别名 分支名称	# -u是记住地址及分支，下次推送直接git push即可
+
+git remote add 远程仓库别名 远程仓库地址	#为远程仓库起别名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-拉取远程仓库操作"><a href="#7-拉取远程仓库操作" class="headerlink" title="7. 拉取远程仓库操作"></a>7. 拉取远程仓库操作</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git clone 远程仓库地址			#克隆远程仓库代码到本地仓库
+git pull 远程仓库地址 分支名称		#获取远程仓库的最新版本<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="8-解决冲突问题"><a href="#8-解决冲突问题" class="headerlink" title="8. 解决冲突问题"></a>8. 解决冲突问题</h3><p>遇到代码冲突问题，只能人为修改以保证分支正常</p>
+<h3 id="9-跨团队合作"><a href="#9-跨团队合作" class="headerlink" title="9. 跨团队合作"></a>9. 跨团队合作</h3><p>甲程序员 Fork仓库 –&gt; 甲程序员讲仓库clone到本地进行修改 –&gt; 甲程序员推送到远程 –&gt; 甲程序员发起pull request –&gt; 原作者审核 –&gt; 原作者进行合并代码</p>
+<h3 id="10-SSH免登陆"><a href="#10-SSH免登陆" class="headerlink" title="10. SSH免登陆"></a>10. SSH免登陆</h3><pre class="line-numbers language-shel" data-language="shel"><code class="language-shel">生成秘钥：ssh-keygen
+秘钥存储目录： C：&#x2F;Users&#x2F;你的用户名&#x2F;.ssh
+公钥名称：id_rsa.pub
+私钥名称：id_rsa<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>生成秘钥后，打开公钥，复制内容，在远程仓库中，Setting –&gt; SSH设置 –&gt; 添加SSH秘钥 –&gt; 粘贴添加。然后在push的时候通过ssh链接进行推送，即可实现不用账号密码登录</p>
 
                 
             </div>
@@ -506,7 +534,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/05/22/hello-world/">http://example.com/2021/05/22/hello-world/</a>
+                    <a href="http://example.com/2021/05/22/git-ming-ling-ji-he/">http://example.com/2021/05/22/git-ming-ling-ji-he/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,13 +745,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/dui-xiang-yi-si-ma/">
+                <a href="/2021/05/22/gui-bing-pai-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象已死吗">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="归并排序">
                         
-                        <span class="card-title">对象已死吗</span>
+                        <span class="card-title">归并排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -754,13 +782,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/21/springboot-zi-ding-yi-yi-chang-shi-tu/">
+                <a href="/2021/05/22/guan-yu-zheng-shu-er-fen-cha-zhao-ji-bian-jie-wen-ti-fen-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SpringBoot自定义异常视图">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="关于整数二分查找及边界问题分析">
                         
-                        <span class="card-title">SpringBoot自定义异常视图</span>
+                        <span class="card-title">关于整数二分查找及边界问题分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -771,7 +799,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
                             </span>
                         <span class="publish-author">
                             
