@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="hexo,个人博客,blog" />
+  <meta name="description" content="LittleY的个人博客" />
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>滑动窗口</title>
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/">LittleY&#39;Blog</a>
+  <a class="face-img" href="/">
+    <img src="https://avatars.githubusercontent.com/u/47181393?v=4">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    滑动窗口
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2021-05-22T07:35:18.000Z" itemprop="datePublished">2021-05-22</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2021-05-22T07:35:22.730Z" itemprop="dateUpdated">2021-05-22</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <p>有一个大小为 kk 的滑动窗口，它从数组的最左边移动到最右边。你只能在窗口中看到 kk 个数字。<br>每次滑动窗口向右移动一个位置。</p>
+<p>以下是一个例子：<br>该数组为 <code>[1 3 -1 -3 5 3 6 7]</code>，kk 为 33。</p>
+<table>
+<thead>
+<tr>
+<th align="left">窗口位置</th>
+<th align="left">最小值</th>
+<th align="left">最大值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">[1 3 -1] -3 5 3 6 7</td>
+<td align="left">-1</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">1 [3 -1 -3] 5 3 6 7</td>
+<td align="left">-3</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">1 3 [-1 -3 5] 3 6 7</td>
+<td align="left">-3</td>
+<td align="left">5</td>
+</tr>
+<tr>
+<td align="left">1 3 -1 [-3 5 3] 6 7</td>
+<td align="left">-3</td>
+<td align="left">5</td>
+</tr>
+<tr>
+<td align="left">1 3 -1 -3 [5 3 6] 7</td>
+<td align="left">3</td>
+<td align="left">6</td>
+</tr>
+<tr>
+<td align="left">1 3 -1 -3 5 [3 6 7]</td>
+<td align="left">3</td>
+<td align="left">7</td>
+</tr>
+</tbody></table>
+<p>你的任务是确定滑动窗口位于每个位置时，窗口中的最大值和最小值。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>输入包含两行。<br>第一行包含两个整数 nn 和 kk，分别代表数组长度和滑动窗口的长度。<br>第二行有 nn 个整数，代表数组的具体数值。<br>同行数据之间用空格隔开。</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>输出包含两个。<br>第一行输出，从左至右，每个位置滑动窗口中的最小值。<br>第二行输出，从左至右，每个位置滑动窗口中的最大值。</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>本题使用的是单调队列的解决方案。<br>首先，代码中的嗯a[N]是用来存放所输入的数组，q[N]是用来模拟的单调队列的数组。<br>其思想和单调栈解决问题的思想很相似。既然要拿到极值，则可以维护一个长度为k的单调队列，用来存放窗口内的数字。因此，每次直接取此队列的头节点即为所需数。</p>
+<h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><ol>
+<li>判断队头部是否出窗口；</li>
+<li>比较当前数组和当前的队列，进行维护，使之保持单调性；</li>
+<li>将当前的下标插到队列尾部；</li>
+<li>输出当前队列头部节点(“即极值”)。</li>
+</ol>
+<p><strong>此外需要注意的点几点</strong></p>
+<ol>
+<li>上面四个步骤中一定要先3后4，因为有可能输出的正是新加入的那个元素;</li>
+<li>算最大值前注意将hh和tt重置;</li>
+<li>hh从0开始，数组下标也要从0开始。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000010</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//a[N]：存储样本数据</span></span><br><span class="line"><span class="comment">//q[N]：数组模拟队列，存放的是指针（即下标）</span></span><br><span class="line"><span class="keyword">int</span> a[N],q[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,k;</span><br><span class="line">    scanf(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i ++)   scanf(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> hh = <span class="number">0</span>, tt = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n ;i ++)&#123;</span><br><span class="line">        <span class="comment">//若队列头部出了窗口，则头部后移一下</span></span><br><span class="line">        <span class="keyword">if</span>(hh &lt;= tt &amp;&amp; i - k + <span class="number">1</span> &gt; q[hh]) hh ++ ;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果新的节点小于队尾，则删去队尾，一直删到符合单调性位置</span></span><br><span class="line">        <span class="keyword">while</span>(hh &lt;= tt &amp;&amp; a[q[tt]] &gt;= a[i]) tt--;</span><br><span class="line">        <span class="comment">//在向队尾插入新的节点，（注意）</span></span><br><span class="line">        q[++ tt] = i;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//只要窗口满了，则输出结果</span></span><br><span class="line">        <span class="keyword">if</span>(i &gt;= k - <span class="number">1</span>) printf(<span class="string">&quot;%d &quot;</span>,a[q[hh]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    puts(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//求极大值同理，将上面的代码镜像一下就OK</span></span><br><span class="line"></span><br><span class="line">    hh = <span class="number">0</span>, tt = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n ;i ++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(hh &lt;= tt &amp;&amp; i - k + <span class="number">1</span> &gt; q[hh]) hh ++ ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(hh &lt;= tt &amp;&amp; a[q[tt]] &lt;= a[i]) tt--;</span><br><span class="line">        q[++ tt] = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(i &gt;= k - <span class="number">1</span>) printf(<span class="string">&quot;%d &quot;</span>,a[q[hh]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    puts(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+        <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+        </div>
+        <div class="comments" id="comments">
+          
+
+        </div>
+      </div>
+    </div>
+   </div>
+</main>
+<div class="footer">
+  <div class="info">
+    <p>
+    <a target="_blank" rel="noopener" href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a target="_blank" rel="noopener" href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>
+      主题
+    </p>
+    <p>&copy;2020-2021 LittleY的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问 https://littley98.github.io/ ，围观LittleY的博客(づ｡◕‿‿◕｡)づ！\n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/./js/main.js"></script>
+
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
