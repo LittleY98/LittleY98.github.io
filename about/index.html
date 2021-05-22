@@ -306,11 +306,12 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    // var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
     var bannerUrl = "/medias/banner/" + 0 + '.jpg';
 
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-    // $('.bg-cover').css('background-image', 'url(https://api.vvhan.com/api/acgimg)');
+
+
+
 
 </script>
 
@@ -539,7 +540,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"其他","value":1},{"name":"Java基础","value":1},{"name":"JVM","value":8},{"name":"MySQL","value":4},{"name":"Spring框架","value":1},{"name":"算法","value":4},{"name":"设计模式","value":8}],
+                data: [{"name":"JVM","value":8},{"name":"其他","value":1},{"name":"Java基础","value":1},{"name":"Spring框架","value":1},{"name":"MySQL","value":4},{"name":"算法","value":4},{"name":"设计模式","value":8}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,

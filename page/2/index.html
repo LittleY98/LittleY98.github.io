@@ -300,11 +300,12 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    // var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
     var bannerUrl = "/medias/banner/" + 0 + '.jpg';
 
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-    // $('.bg-cover').css('background-image', 'url(https://api.vvhan.com/api/acgimg)');
+
+
+
 
 </script>
 
@@ -322,50 +323,6 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/22/dan-li-mo-shi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="单例模式(Singleton Pattern)">
-                            
-                            <span class="card-title">单例模式(Singleton Pattern)</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                单例模式在有些开发场景中，没有必要有多个实例存在，以节省资源。比如说 PropertiyMgr 工具类
-饿汉式实现代码如下：
-public class Mgr01 &#123;
-    private static final Mgr01 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    设计模式
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
             
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
@@ -470,21 +427,23 @@ G1
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/05/22/jian-zao-zhe-mo-shi/">
+                    <a href="/2021/05/22/dan-li-mo-shi/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="建造者模式（Builder Patttern）">
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="单例模式(Singleton Pattern)">
                             
-                            <span class="card-title">建造者模式（Builder Patttern）</span>
+                            <span class="card-title">单例模式(Singleton Pattern)</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                建造者模式（Builder Patttern）在软件开发过程中有时需要创建一个复杂的对象，这个复杂对象通常由多个子部件按一定的步骤组合而成。这时就需要建造者模式来解决。
-1. 定义指将一个复杂对象的构造与它的表示分离，使同样的构建过程可以创
+                                单例模式在有些开发场景中，没有必要有多个实例存在，以节省资源。比如说 PropertiyMgr 工具类
+饿汉式实现代码如下：
+public class Mgr01 &#123;
+    private static final Mgr01 
                             
                         </div>
                         <div class="publish-info">
@@ -569,6 +528,48 @@ Header（对象头）
                         <div class="summary block-with-text">
                             
                                 工厂模式工厂设计模式，就是用来生产对象的，在Java中，万物皆对象，这些对象都需要创建，如果创建的时候直接new该对象，就会对该对象耦合严重，假如我们要更换对象，所有new对象的地方都需要修改一遍，这显然违背了软件设计的开闭原则，如果我们使
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/05/22/jian-zao-zhe-mo-shi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="建造者模式（Builder Patttern）">
+                            
+                            <span class="card-title">建造者模式（Builder Patttern）</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                建造者模式（Builder Patttern）在软件开发过程中有时需要创建一个复杂的对象，这个复杂对象通常由多个子部件按一定的步骤组合而成。这时就需要建造者模式来解决。
+1. 定义指将一个复杂对象的构造与它的表示分离，使同样的构建过程可以创
                             
                         </div>
                         <div class="publish-info">
