@@ -301,7 +301,7 @@
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
     // var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    var bannerUrl = "/medias/banner/" + 6 + '.jpg';
+    var bannerUrl = "/medias/banner/" + 0 + '.jpg';
 
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
     // $('.bg-cover').css('background-image', 'url(https://api.vvhan.com/api/acgimg)');
@@ -322,6 +322,50 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/05/22/dan-li-mo-shi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="单例模式(Singleton Pattern)">
+                            
+                            <span class="card-title">单例模式(Singleton Pattern)</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                单例模式在有些开发场景中，没有必要有多个实例存在，以节省资源。比如说 PropertiyMgr 工具类
+饿汉式实现代码如下：
+public class Mgr01 &#123;
+    private static final Mgr01 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
             
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
@@ -426,6 +470,48 @@ G1
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2021/05/22/jian-zao-zhe-mo-shi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="建造者模式（Builder Patttern）">
+                            
+                            <span class="card-title">建造者模式（Builder Patttern）</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                建造者模式（Builder Patttern）在软件开发过程中有时需要创建一个复杂的对象，这个复杂对象通常由多个子部件按一定的步骤组合而成。这时就需要建造者模式来解决。
+1. 定义指将一个复杂对象的构造与它的表示分离，使同样的构建过程可以创
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2021/05/22/dui-xiang-de-nei-cun-bu-ju-he-chuang-jian/">
                         <div class="card-image">
                             
@@ -454,92 +540,6 @@ Header（对象头）
                                 
                                 <a href="/categories/JVM/" class="post-category">
                                     JVM
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/22/dan-li-mo-shi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="单例模式(Singleton Pattern)">
-                            
-                            <span class="card-title">单例模式(Singleton Pattern)</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                单例模式在有些开发场景中，没有必要有多个实例存在，以节省资源。比如说 PropertiyMgr 工具类
-饿汉式实现代码如下：
-public class Mgr01 &#123;
-    private static final Mgr01 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    设计模式
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/22/jian-zao-zhe-mo-shi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="建造者模式（Builder Patttern）">
-                            
-                            <span class="card-title">建造者模式（Builder Patttern）</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                建造者模式（Builder Patttern）在软件开发过程中有时需要创建一个复杂的对象，这个复杂对象通常由多个子部件按一定的步骤组合而成。这时就需要建造者模式来解决。
-1. 定义指将一个复杂对象的构造与它的表示分离，使同样的构建过程可以创
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    设计模式
                                 </a>
                                 
                                 
@@ -637,21 +637,23 @@ public class Mgr01 &#123;
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/05/22/guan-cha-zhe-mo-shi/">
+                    <a href="/2021/05/22/jing-tai-dai-li-mo-shi/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="观察者模式（Observer Pattern）">
+                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="静态代理模式（Static Proxy）">
                             
-                            <span class="card-title">观察者模式（Observer Pattern）</span>
+                            <span class="card-title">静态代理模式（Static Proxy）</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                观察者模式（Observer Pattern）在现实世界中，许多对象并不是独立存在的，其中一个对象的行为发生改变可能会导致一个或者多个其他对象的行为也发生改变。
-1. 定义指多个对象间存在一对多的依赖关系，当一个对象的状态发生改变时，所有依
+                                静态代理模式（Static Proxy）1. 定义给目标对象提供一个代理对象，并由代理对象控制对目标对象的引用。防止直接访问目标对象给系统带来的不必要复杂性。
+2. 优缺点优点
+可以使真是角色的操作更加纯粹，不用去关心一些公共业务
+公共业务
                             
                         </div>
                         <div class="publish-info">
@@ -679,23 +681,21 @@ public class Mgr01 &#123;
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/05/22/jing-tai-dai-li-mo-shi/">
+                    <a href="/2021/05/22/guan-cha-zhe-mo-shi/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="静态代理模式（Static Proxy）">
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="观察者模式（Observer Pattern）">
                             
-                            <span class="card-title">静态代理模式（Static Proxy）</span>
+                            <span class="card-title">观察者模式（Observer Pattern）</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                静态代理模式（Static Proxy）1. 定义给目标对象提供一个代理对象，并由代理对象控制对目标对象的引用。防止直接访问目标对象给系统带来的不必要复杂性。
-2. 优缺点优点
-可以使真是角色的操作更加纯粹，不用去关心一些公共业务
-公共业务
+                                观察者模式（Observer Pattern）在现实世界中，许多对象并不是独立存在的，其中一个对象的行为发生改变可能会导致一个或者多个其他对象的行为也发生改变。
+1. 定义指多个对象间存在一对多的依赖关系，当一个对象的状态发生改变时，所有依
                             
                         </div>
                         <div class="publish-info">
