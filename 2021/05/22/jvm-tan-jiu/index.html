@@ -423,13 +423,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="JVM探究"><a href="#JVM探究" class="headerlink" title="JVM探究"></a>JVM探究</h2><h3 id="JVM的位置在哪儿？"><a href="#JVM的位置在哪儿？" class="headerlink" title="JVM的位置在哪儿？"></a>JVM的位置在哪儿？</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717224310097.png" alt="image-20200717224310097" style="zoom:67%;" />
+                <h2 id="JVM探究"><a href="#JVM探究" class="headerlink" title="JVM探究"></a>JVM探究</h2><h3 id="JVM的位置在哪儿？"><a href="#JVM的位置在哪儿？" class="headerlink" title="JVM的位置在哪儿？"></a>JVM的位置在哪儿？</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717224310097.png" alt="image-20200717224310097" style="zoom:67%;">
 
-<h3 id="JVM的体系结构图"><a href="#JVM的体系结构图" class="headerlink" title="JVM的体系结构图"></a>JVM的体系结构图</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717224357534.png" alt="image-20200717224357534" style="zoom:67%;" />
+<h3 id="JVM的体系结构图"><a href="#JVM的体系结构图" class="headerlink" title="JVM的体系结构图"></a>JVM的体系结构图</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717224357534.png" alt="image-20200717224357534" style="zoom:67%;">
 
 <p>根据上图，对每个部分一次进行学习。</p>
 <h3 id="类加载器（ClassLoader）"><a href="#类加载器（ClassLoader）" class="headerlink" title="类加载器（ClassLoader）"></a>类加载器（ClassLoader）</h3><p>首先，先学习类加载到JVM的过程：</p>
-<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717224604394.png" alt="image-20200717224604394" style="zoom: 67%;" />
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200717224604394.png" alt="image-20200717224604394" style="zoom: 67%;">
 
 <p>在如下几种情况下，Java虚拟机将结束生命周期：</p>
 <ol>
@@ -649,6 +649,33 @@
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T15-10-37',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 

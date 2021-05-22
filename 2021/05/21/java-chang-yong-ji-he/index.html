@@ -435,13 +435,13 @@
 <p>(1) AbstractMap是一个抽象类，它实现了Map接口中的大部分API。二HashMap、TreeMap、WeakHashMap都是继承了AbstractMap。Hashtable虽然继承与Dictionary，但是他实现了Map接口。</p>
 </li>
 </ol>
-<img src="https://gitee.com/yangxun98/My_Images/raw/master/Spring_Theory/image-20200714205831974.png" alt="image-20200714205831974" style="zoom:67%;" />
+<img src="https://gitee.com/yangxun98/My_Images/raw/master/Spring_Theory/image-20200714205831974.png" alt="image-20200714205831974" style="zoom:67%;">
 
 <h3 id="2-关于集合类-Collection"><a href="#2-关于集合类-Collection" class="headerlink" title="2. 关于集合类(Collection)"></a>2. 关于集合类(Collection)</h3><ol>
 <li>Collection是集合的父类，但是JDK不提供直接继承自Collection的集合类让用户使用，而是提供继承自Collection子接口List和Set的集合类让用户使用。 </li>
 <li>List和Set的区别，List提供了随机访问的方法，内部元素是有序的，并且允许为空；而实现Set接口的类，内部元素是无序的，并且最多只能有一个null元素，并且放入Set中的元素必须不相等，就是要满足e1.equals(e2)==false，另外必须小心操作可变对象，当Set中的可变对象被操作后使得Set中有两个元素满足了e1.equals(e2)==true时就会发生一些问题。</li>
 <li>ArrayList类。ArrayList实现了可变大小的数组。它允许所有元素，包括null。ArrayList没有同步。每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。</li>
-<li>LikedList。它内部的结构是基于链表的。LinkedList实现了List接口，允许null元素。此外LinkedList实现了Deque<E>, Queue<E>接口，提供额外的get，remove，insert方法在LinkedList的首部或尾部。所以LinkedList可以用来实现队列操作。它也是非同步的。</li>
+<li>LikedList。它内部的结构是基于链表的。LinkedList实现了List接口，允许null元素。此外LinkedList实现了Deque<E>, Queue<E>接口，提供额外的get，remove，insert方法在LinkedList的首部或尾部。所以LinkedList可以用来实现队列操作。它也是非同步的。</E></E></li>
 <li>Vector。它与ArrayList非常相似，但是Vector是同步的。</li>
 <li>HashSet。它内部是使用Hash表来存放元素的，通过HashMap来实现的。元素</li>
 </ol>
@@ -456,7 +456,7 @@
 <h3 id="5-关于Arrays类"><a href="#5-关于Arrays类" class="headerlink" title="5. 关于Arrays类"></a>5. 关于Arrays类</h3><p>Arrays类提供了很多处理数组相关的静态方法，如数组的查找、比较、排序等操作。另外该类还提供了一个静态方法，将数组转换成List，该方法就是</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token class-name">T</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> array<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="6-同步的集合类以及容器类（Synchronized）"><a href="#6-同步的集合类以及容器类（Synchronized）" class="headerlink" title="6. 同步的集合类以及容器类（Synchronized）"></a>6. 同步的集合类以及容器类（Synchronized）</h3><p>一般的集合类和容器类都是非同步的（除了Vector和Hashtable以及它们的子类），如果用在多线程环境下必须自己写有关同步的代码。JDK中为我们提供了与一般集合容器类相应的同步类，SynchronizedCollection<E>、SynchronizedList<E>、SynchronizedMap<E>、SynchronizedSet<E>、SynchronizedSortedSet<E>、SynchronizedMap<E>，这些类都是Collections类中的静态内部类，通过Collections.synchronizedXXX()方法就可以获得相关的同步集合容器类，并且得到的同步类与作为参数的非同步类共享数据空间，当在同步类中对集合或者容器做出修改，在非同步的类中能同步感受到。例如</p>
+<h3 id="6-同步的集合类以及容器类（Synchronized）"><a href="#6-同步的集合类以及容器类（Synchronized）" class="headerlink" title="6. 同步的集合类以及容器类（Synchronized）"></a>6. 同步的集合类以及容器类（Synchronized）</h3><p>一般的集合类和容器类都是非同步的（除了Vector和Hashtable以及它们的子类），如果用在多线程环境下必须自己写有关同步的代码。JDK中为我们提供了与一般集合容器类相应的同步类，SynchronizedCollection<E>、SynchronizedList<E>、SynchronizedMap<E>、SynchronizedSet<E>、SynchronizedSortedSet<E>、SynchronizedMap<E>，这些类都是Collections类中的静态内部类，通过Collections.synchronizedXXX()方法就可以获得相关的同步集合容器类，并且得到的同步类与作为参数的非同步类共享数据空间，当在同步类中对集合或者容器做出修改，在非同步的类中能同步感受到。例如</E></E></E></E></E></E></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> list1 <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">synchronizedList</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -482,9 +482,9 @@ list1<span class="token punctuation">.</span><span class="token function">remove
 <li>还有一些有用的适用于某些并发场合的集合类，CopyOnWriteArrayList等。</li>
 <li>在这里只要Java中存在同步集合容器和并发集合容器类就可以了，当遇到多线程的情况或者要求并发的情况下，再去找相关的合适的同步或并发的集合容器类。</li>
 </ol>
-<h3 id="8-UML图"><a href="#8-UML图" class="headerlink" title="8. UML图"></a>8. UML图</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200714210622546.png" alt="image-20200714210622546" style="zoom: 80%;" />
+<h3 id="8-UML图"><a href="#8-UML图" class="headerlink" title="8. UML图"></a>8. UML图</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200714210622546.png" alt="image-20200714210622546" style="zoom: 80%;">
 
-<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200714210622546.png" alt="image-20200714210622546" style="zoom: 80%;" />
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200714210622546.png" alt="image-20200714210622546" style="zoom: 80%;">
 
 
                 
@@ -697,6 +697,33 @@ list1<span class="token punctuation">.</span><span class="token function">remove
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-21T15-17-56',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 

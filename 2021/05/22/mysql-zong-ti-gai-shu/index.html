@@ -423,7 +423,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="MySQL架构方面"><a href="#MySQL架构方面" class="headerlink" title="MySQL架构方面"></a>MySQL架构方面</h2><h3 id="Mysql的基本架构图"><a href="#Mysql的基本架构图" class="headerlink" title="Mysql的基本架构图"></a>Mysql的基本架构图</h3><img src="https://gitee.com/LittleY98/My_Images/raw/master/Spring_Theory/image-20200724182426368.png" alt="image-20200724182426368" style="zoom:80%;" />
+                <h2 id="MySQL架构方面"><a href="#MySQL架构方面" class="headerlink" title="MySQL架构方面"></a>MySQL架构方面</h2><h3 id="Mysql的基本架构图"><a href="#Mysql的基本架构图" class="headerlink" title="Mysql的基本架构图"></a>Mysql的基本架构图</h3><img src="https://gitee.com/LittleY98/My_Images/raw/master/Spring_Theory/image-20200724182426368.png" alt="image-20200724182426368" style="zoom:80%;">
 
 <h4 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h4><ol>
 <li>连接器负责跟客户端建立连接，获取权限、维持和管理连接<ul>
@@ -737,6 +737,33 @@
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T15-38-35',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 

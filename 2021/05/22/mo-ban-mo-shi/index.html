@@ -447,7 +447,7 @@
 <li><p>具体子类（Concrete Class）：实现抽象类中所定义的抽象方法和钩子方法，它们是一个顶级逻辑的一个组成步骤。</p>
 </li>
 </ol>
-<h4 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200721144812958.png" alt="image-20200721144812958" style="zoom: 80%;" />
+<h4 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200721144812958.png" alt="image-20200721144812958" style="zoom: 80%;">
 
 <h3 id="4-代码实现"><a href="#4-代码实现" class="headerlink" title="4. 代码实现"></a>4. 代码实现</h3><p>老规矩，举个栗子。迎接客人，而这个迎接客人的流程是一样的，都是visit、talk、bye。但是根据客人身份的不同，实现的方式也不同，这里设定的是两种客人，一种是儿子带女朋友回家，一个是女儿带男朋友回家。</p>
 <p>抽象类：</p>
@@ -838,6 +838,33 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T14-42-30',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
 
     
 
@@ -862,13 +889,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/gong-han-mo-shi/">
+                <a href="/2021/05/22/jian-zao-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="工厂模式（Factory Pattern）">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="建造者模式（Builder Patttern）">
                         
-                        <span class="card-title">工厂模式（Factory Pattern）</span>
+                        <span class="card-title">建造者模式（Builder Patttern）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -903,13 +930,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/22/jian-zao-zhe-mo-shi/">
+                <a href="/2021/05/22/guan-cha-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="建造者模式（Builder Patttern）">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="观察者模式（Observer Pattern）">
                         
-                        <span class="card-title">建造者模式（Builder Patttern）</span>
+                        <span class="card-title">观察者模式（Observer Pattern）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

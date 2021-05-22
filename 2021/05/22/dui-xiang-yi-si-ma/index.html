@@ -428,11 +428,11 @@
 <p><strong>优点</strong>：判定效率高</p>
 <p><strong>缺点</strong>:如果对象间循环依赖,此算法无法正确判断是否为垃圾对象。因此主流虚拟机都没有用这种算法。</p>
 <p><strong>循环依赖</strong>如下图所示：</p>
-<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200718161104467.png" alt="image-20200718161104467" style="zoom:67%;" />
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200718161104467.png" alt="image-20200718161104467" style="zoom:67%;">
 
 <h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2. 可达性分析算法"></a>2. 可达性分析算法</h3><p>目前主流的JVM都是用的可达性分析算法来判断对象是否存货的。</p>
 <h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p><code>GC Roots</code>的对象作为起始点从这些节点开始向下搜索,搜索所走过的路径称为引用链(Reference Chain)当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可达的。如下图：</p>
-<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200718161711008.png" alt="image-20200718161711008" style="zoom:67%;" />
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200718161711008.png" alt="image-20200718161711008" style="zoom:67%;">
 
 <p>图中黄色的对象仍然存活，灰色的显然是不可达的，即为可回收的对象。</p>
 <h4 id="可作为GC-Root对象的包括"><a href="#可作为GC-Root对象的包括" class="headerlink" title="可作为GC Root对象的包括"></a>可作为GC Root对象的包括</h4><ol>
@@ -668,6 +668,33 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T13-02-30',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
 
     
 
@@ -692,13 +719,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/guan-cha-zhe-mo-shi/">
+                <a href="/2021/05/22/jing-tai-dai-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="观察者模式（Observer Pattern）">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="静态代理模式（Static Proxy）">
                         
-                        <span class="card-title">观察者模式（Observer Pattern）</span>
+                        <span class="card-title">静态代理模式（Static Proxy）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

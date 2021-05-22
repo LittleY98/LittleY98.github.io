@@ -505,7 +505,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="双亲委派是什么"><a href="#双亲委派是什么" class="headerlink" title="双亲委派是什么"></a>双亲委派是什么</h4><p>俗的讲，就是某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父类加载器，依次递归，如果父类加载器可以完成类加载任务，就成功返回；只有父类加载器无法完成此加载任务时，才自己去加载。关于虚拟机默认的双亲委派机制，我们可以从系统类加载器和标准扩展类加载器为例作简单分析。</p>
-<h4 id="类加载器模型图"><a href="#类加载器模型图" class="headerlink" title="类加载器模型图"></a>类加载器模型图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200719204659893.png" alt="image-20200719204659893" style="zoom: 67%;" />
+<h4 id="类加载器模型图"><a href="#类加载器模型图" class="headerlink" title="类加载器模型图"></a>类加载器模型图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200719204659893.png" alt="image-20200719204659893" style="zoom: 67%;">
                 
             </div>
             <hr/>
@@ -716,6 +716,33 @@
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T15-08-04',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 

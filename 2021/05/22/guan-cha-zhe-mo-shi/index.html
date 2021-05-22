@@ -439,7 +439,7 @@
 <li>抽象观察者（Observer）角色：它是一个抽象类或接口，它包含了一个更新自己的抽象方法，当接到具体主题的更改通知时被调用。</li>
 <li>具体观察者（Concrete Observer）角色：实现抽象观察者中定义的抽象方法，以便在得到目标的更改通知时更新自身的状态。</li>
 </ol>
-<h4 id="模式图"><a href="#模式图" class="headerlink" title="模式图"></a>模式图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/3-1Q1161A6221S.gif" alt="观察者模式的结构图" style="zoom:80%;" />
+<h4 id="模式图"><a href="#模式图" class="headerlink" title="模式图"></a>模式图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/3-1Q1161A6221S.gif" alt="观察者模式的结构图" style="zoom:80%;">
 
 <h3 id="4-代码"><a href="#4-代码" class="headerlink" title="4. 代码"></a>4. 代码</h3><p>抽象对象类：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>yang<span class="token punctuation">.</span>observe</span><span class="token punctuation">;</span>
@@ -780,6 +780,33 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T14-42-30',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
 
     
 
@@ -804,13 +831,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/jing-tai-dai-li-mo-shi/">
+                <a href="/2021/05/22/mo-ban-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="静态代理模式（Static Proxy）">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="模板模式（Template Pattern）">
                         
-                        <span class="card-title">静态代理模式（Static Proxy）</span>
+                        <span class="card-title">模板模式（Template Pattern）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -845,13 +872,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/22/dui-xiang-yi-si-ma/">
+                <a href="/2021/05/22/jing-tai-dai-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象已死吗">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="静态代理模式（Static Proxy）">
                         
-                        <span class="card-title">对象已死吗</span>
+                        <span class="card-title">静态代理模式（Static Proxy）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -868,8 +895,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
                                 </a>
                             
                             

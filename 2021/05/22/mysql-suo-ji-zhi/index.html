@@ -439,15 +439,15 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">获取表的write锁定<br />lock table mylock write;</td>
+<td align="center">获取表的write锁定<br>lock table mylock write;</td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="center">当前session对表的查询，插入，更新操作都可以执行<br />select * from mylock;<br />insert into mylock values(5,’e’);</td>
-<td align="center">当前session对表的查询会被阻塞<br />select * from mylock；</td>
+<td align="center">当前session对表的查询，插入，更新操作都可以执行<br>select * from mylock;<br>insert into mylock values(5,’e’);</td>
+<td align="center">当前session对表的查询会被阻塞<br>select * from mylock；</td>
 </tr>
 <tr>
-<td align="center">释放锁：<br />unlock tables；</td>
+<td align="center">释放锁：<br>unlock tables；</td>
 <td align="center">当前session能够立刻执行，并返回对应结果</td>
 </tr>
 </tbody></table>
@@ -461,23 +461,23 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">获得表的read锁定<br />lock table mylock read;</td>
+<td align="center">获得表的read锁定<br>lock table mylock read;</td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="center">当前session可以查询该表记录：<br />select * from mylock;</td>
-<td align="center">当前session可以查询该表记录：<br />select * from mylock;</td>
+<td align="center">当前session可以查询该表记录：<br>select * from mylock;</td>
+<td align="center">当前session可以查询该表记录：<br>select * from mylock;</td>
 </tr>
 <tr>
-<td align="center">当前session不能查询没有锁定的表<br />select * from person<br />Table ‘person’ was not locked with LOCK TABLES</td>
-<td align="center">当前session可以查询或者更新未锁定的表<br />select * from person<br />insert into person values(1,’zhangsan’);</td>
+<td align="center">当前session不能查询没有锁定的表<br>select * from person<br>Table ‘person’ was not locked with LOCK TABLES</td>
+<td align="center">当前session可以查询或者更新未锁定的表<br>select * from person<br>insert into person values(1,’zhangsan’);</td>
 </tr>
 <tr>
-<td align="center">当前session插入或者更新表会提示错误<br />insert into mylock values(6,’f’)<br />Table ‘mylock’ was locked with a READ lock and can’t be updated<br />update mylock set name=’aa’ where id = 1;<br />Table ‘mylock’ was locked with a READ lock and can’t be updated</td>
-<td align="center">当前session插入数据会等待获得锁<br />insert into mylock values(6,’f’);</td>
+<td align="center">当前session插入或者更新表会提示错误<br>insert into mylock values(6,’f’)<br>Table ‘mylock’ was locked with a READ lock and can’t be updated<br>update mylock set name=’aa’ where id = 1;<br>Table ‘mylock’ was locked with a READ lock and can’t be updated</td>
+<td align="center">当前session插入数据会等待获得锁<br>insert into mylock values(6,’f’);</td>
 </tr>
 <tr>
-<td align="center">释放锁<br />unlock tables;</td>
+<td align="center">释放锁<br>unlock tables;</td>
 <td align="center">获得锁，更新成功</td>
 </tr>
 </tbody></table>
@@ -493,16 +493,16 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">获取表的read lock锁定<br />lock table mylock read local</td>
+<td align="center">获取表的read lock锁定<br>lock table mylock read local</td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="center">当前session不能对表进行更新或者插入操作<br />insert into mylock values(6,’f’)<br />Table ‘mylock’ was locked with a READ lock and can’t be updated<br />update mylock set name=’aa’ where id = 1;<br />Table ‘mylock’ was locked with a READ lock and can’t be updated</td>
-<td align="center">其他session可以查询该表的记录<br />select* from mylock</td>
+<td align="center">当前session不能对表进行更新或者插入操作<br>insert into mylock values(6,’f’)<br>Table ‘mylock’ was locked with a READ lock and can’t be updated<br>update mylock set name=’aa’ where id = 1;<br>Table ‘mylock’ was locked with a READ lock and can’t be updated</td>
+<td align="center">其他session可以查询该表的记录<br>select* from mylock</td>
 </tr>
 <tr>
-<td align="center">当前session不能查询没有锁定的表<br />select * from person<br />Table ‘person’ was not locked with LOCK TABLES</td>
-<td align="center">其他session可以进行插入操作，但是更新会阻塞<br />update mylock set name = ‘aa’ where id = 1;</td>
+<td align="center">当前session不能查询没有锁定的表<br>select * from person<br>Table ‘person’ was not locked with LOCK TABLES</td>
+<td align="center">其他session可以进行插入操作，但是更新会阻塞<br>update mylock set name = ‘aa’ where id = 1;</td>
 </tr>
 <tr>
 <td align="center">当前session不能访问其他session插入的记录；</td>
@@ -613,8 +613,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">set autocommit=0<br />select * from tab_no_index where id = 1;</td>
-<td align="center">set autocommit=0<br />select * from tab_no_index where id =2</td>
+<td align="center">set autocommit=0<br>select * from tab_no_index where id = 1;</td>
+<td align="center">set autocommit=0<br>select * from tab_no_index where id =2</td>
 </tr>
 <tr>
 <td align="center">select * from tab_no_index where id = 1 for update</td>
@@ -639,8 +639,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">set autocommit=0<br />select * from tab_with_indexwhere id = 1;</td>
-<td align="center">set autocommit=0<br />select * from tab_with_indexwhere id =2</td>
+<td align="center">set autocommit=0<br>select * from tab_with_indexwhere id = 1;</td>
+<td align="center">set autocommit=0<br>select * from tab_with_indexwhere id =2</td>
 </tr>
 <tr>
 <td align="center">select * from tab_with_indexwhere id = 1 for update</td>
@@ -672,7 +672,7 @@
 </tr>
 <tr>
 <td align="center"></td>
-<td align="center">select * from tab_with_index where id = 1 and name=’4’ for update<br />虽然session2访问的是和session1不同的记录，但是因为使用了相同的索引，所以需要等待锁</td>
+<td align="center">select * from tab_with_index where id = 1 and name=’4’ for update<br>虽然session2访问的是和session1不同的记录，但是因为使用了相同的索引，所以需要等待锁</td>
 </tr>
 </tbody></table>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>对于MyISAM的表锁，主要讨论了以下几点：</strong> </p>
@@ -911,6 +911,33 @@
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T15-37-39',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 

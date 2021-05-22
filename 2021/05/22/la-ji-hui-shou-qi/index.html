@@ -440,7 +440,7 @@
 <li>G1</li>
 </ul>
 <p>他们之间的关系如下图：</p>
-<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200719180251166.png" alt="image-20200719180251166" style="zoom:67%;" />
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200719180251166.png" alt="image-20200719180251166" style="zoom:67%;">
 
 <p>如果两个收集器之间存在连线，则说明它们可以搭配使用。虚拟机所处的区域则表示它是属于新生代还是老年代收集器。</p>
 <h3 id="2-新生代垃圾收集器"><a href="#2-新生代垃圾收集器" class="headerlink" title="2. 新生代垃圾收集器"></a>2. 新生代垃圾收集器</h3><h4 id="Serial-收集器"><a href="#Serial-收集器" class="headerlink" title="Serial 收集器"></a>Serial 收集器</h4><p>Serial 是一款用于新生代的单线程收集器，采用复制算法进行垃圾收集。Serial 进行垃圾收集时，不仅只用一条线程执行垃圾收集工作，它在收集的同时，所有的用户线程必须暂停（Stop The World）。如图：</p>
@@ -499,7 +499,7 @@
 <p><strong>适用场景</strong>：重视服务器响应速度，要求系统停顿时间最短。</p>
 <p><strong>参数</strong>：可以使用 -XX:+UserConMarkSweepGC 来选择 CMS 作为老年代收集器</p>
 <h3 id="4-新生代和老年代垃圾收集器"><a href="#4-新生代和老年代垃圾收集器" class="headerlink" title="4. 新生代和老年代垃圾收集器"></a>4. 新生代和老年代垃圾收集器</h3><h4 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h4><p>一款面向服务端应用的垃圾收集器。G1 收集器是 jdk1.7 才正式引用的商用收集器，现在已经成为 jdk9 默认的收集器。前面几款收集器收集的范围都是新生代或者老年代，G1 进行垃圾收集的范围是整个堆内存，它采用 “ 化整为零 ” 的思路，把整个堆内存划分为多个大小相等的独立区域（Region），在 G1 收集器中还保留着新生代和老年代的概念，它们分别都是一部分 Region，如下图：</p>
-<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200720011510478.png" alt="image-20200720011510478" style="zoom:67%;" />
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200720011510478.png" alt="image-20200720011510478" style="zoom:67%;">
 
 <p>每一个方块就是一个区域，每个区域可能是 Eden、Survivor、老年代，每种区域的数量也不一定。JVM 启动时会自动设置每个区域的大小（1M ~ 32M，必须是 2 的次幂），最多可以设置 2048 个区域（即支持的最大堆内存为 32M*2048 = 64G），假如设置 -Xmx8g -Xms8g，则每个区域大小为 8g/2048=4M。</p>
 <p>为了在 GC Roots Tracing 的时候避免扫描全堆，在每个 Region 中，都有一个 Remembered Set 来实时记录该区域内的引用类型数据与其他区域数据的引用关系（在前面的几款分代收集中，新生代、老年代中也有一个 Remembered Set 来实时记录与其他区域的引用关系），在标记时直接参考这些引用关系就可以知道这些对象是否应该被清除，而不用扫描全堆的数据。</p>
@@ -727,6 +727,33 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-05-22T14-42-30',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
 
     
 
@@ -751,13 +778,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/22/ce-lue-mo-shi/">
+                <a href="/2021/05/22/dan-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="策略模式(Stratagy)">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="单例模式(Singleton Pattern)">
                         
-                        <span class="card-title">策略模式(Stratagy)</span>
+                        <span class="card-title">单例模式(Singleton Pattern)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -792,13 +819,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/22/dong-tai-dai-li/">
+                <a href="/2021/05/22/gong-han-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="动态代理（Dynamic Proxy）">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="工厂模式（Factory Pattern）">
                         
-                        <span class="card-title">动态代理（Dynamic Proxy）</span>
+                        <span class="card-title">工厂模式（Factory Pattern）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
