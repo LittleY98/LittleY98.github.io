@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="hexo,个人博客,blog" />
+  <meta name="description" content="LittleY的个人博客" />
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>类加载、类加载器、双亲委派</title>
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/">LittleY&#39;Blog</a>
+  <a class="face-img" href="/">
+    <img src="https://avatars.githubusercontent.com/u/47181393?v=4">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    类加载、类加载器、双亲委派
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2021-05-22T07:08:04.000Z" itemprop="datePublished">2021-05-22</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2021-05-22T07:08:32.021Z" itemprop="dateUpdated">2021-05-22</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <h2 id="类加载、类加载器、双亲委派"><a href="#类加载、类加载器、双亲委派" class="headerlink" title="类加载、类加载器、双亲委派"></a>类加载、类加载器、双亲委派</h2><h3 id="1-类加载"><a href="#1-类加载" class="headerlink" title="1. 类加载"></a>1. 类加载</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类型。类加载和连接的过程都是在运行期间完成的。</p>
+<h4 id="加载方式"><a href="#加载方式" class="headerlink" title="加载方式"></a>加载方式</h4><ol>
+<li>本地编译好的class中直接加载</li>
+<li>网络加载：java.net.URLClassLoader可以加载url指定的类</li>
+<li>从jar、zip等等压缩文件加载类，自动解析jar文件找到class文件去加载util类</li>
+<li>从java源代码文件动态编译成为class文件</li>
+</ol>
+<h4 id="类加载的生命周期"><a href="#类加载的生命周期" class="headerlink" title="类加载的生命周期"></a>类加载的生命周期</h4><p>加载（Loading）–&gt;验证（Verification）–&gt;准备（Preparation）–&gt;解析（Resolution）–&gt;初始化（Initialization）–&gt;使用（Using）–&gt;卸载（Unloading）</p>
+<h4 id="过程详解"><a href="#过程详解" class="headerlink" title="过程详解"></a>过程详解</h4><ol>
+<li><p><strong>加载</strong></p>
+<p>A. 加载阶段的工作：</p>
+<p>​    i. 通过一个类的全限定名来获取定义此类的二进制字节流。</p>
+<p>​    ii. 将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</p>
+<p>​    iii. 在java堆中生成一个代表这个类的java.lang.Class对象，做为方法区这些数据的访问入口。</p>
+<p>B. 加载阶段完成之后二进制字节流就按照虚拟机所需的格式存储在方区去中。</p>
+</li>
+<li><p><strong>验证</strong></p>
+<p>这一阶段的目的是为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求。</p>
+<p>​    a) 文件格式验证：验证字节流是否符合Class文件格式的规范，并且能被当前版本的虚拟机处理。</p>
+<p>​    b) 元数据验证：对字节码描述的信息进行语义分析，以确保其描述的信息符合java语言规范的要求。</p>
+<p>​    c) 字节码验证：这个阶段的主要工作是进行数据流和控制流的分析。任务是确保被验证类的方法在运行时不会做出危害虚拟机安全的行为。</p>
+<p>​    d) 符号引用验证：这一阶段发生在虚拟机将符号引用转换为直接引用的时候（解析阶段），主要是对类自身以外的信息进行匹配性的校验。目的是确保解析动作能够正常执行。</p>
+</li>
+<li><p><strong>准备</strong></p>
+<p>准备阶段是正式为变量分配内存并设置初始值，这些内存都将在方法区中进行分配，这里的变量仅包括类标量不包括实例变量。</p>
+<p><strong>注意</strong>：这里的初始值不能弄混，比如说，<code>int i = 666</code> 在这个步骤的赋初始值是给i赋了0值，而非666。</p>
+</li>
+<li><p><strong>解析</strong></p>
+<p>解析是虚拟机将常量池的符号引用替换为直接引用的过程。</p>
+<p>a) 类或接口的解析</p>
+<p>b) 字段的解析</p>
+<p>c) 类方法解析</p>
+<p>d) 接口方法解析</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>符号引用</strong>：符号引用以一组符号来描述所引用的目标，符号可以是任意形式的字面量，只要使用时能无歧义地定位到目标即可。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存中。</p>
+<p><strong>直接引用</strong>：直接引用可以是直接指向目标的指针，相对偏移量或是一个能间接定位到目标的句柄。直接饮用是与内存布局相关的。</p>
+</blockquote>
+<ol start="5">
+<li><p><strong>初始化</strong></p>
+<p>是根据程序员制定的主观计划区初始化变量和其他资源，或者可以从另外一个角度来表达：初始化阶段是执行类构造器()方法的过程。（参考3中，此时的初始化才是给i赋666值的阶段）</p>
+</li>
+</ol>
+<h3 id="2-类加载器"><a href="#2-类加载器" class="headerlink" title="2. 类加载器"></a>2. 类加载器</h3><p>JVM中定义的有3中类加载器。分别是：<strong>启动（Bootstrap）类加载器</strong>、<strong>标准扩展（Extension）类加载器</strong>、<strong>应用类(App)加载器</strong>。</p>
+<h4 id="启动（Bootstrap）类加载器"><a href="#启动（Bootstrap）类加载器" class="headerlink" title="启动（Bootstrap）类加载器"></a>启动（Bootstrap<strong>）</strong>类加载器</h4><p><code>c++</code>编写，加载<code>java</code>核心库 <code>java.*</code>,构造<code>ExtClassLoader</code>和<code>AppClassLoader</code>。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作</p>
+<h4 id="标准扩展（Extension）类加载器"><a href="#标准扩展（Extension）类加载器" class="headerlink" title="标准扩展（Extension）类加载器"></a>标准扩展（Extension）类加载器</h4><p>扩展类加载器是由 Sun 的 ExtClassLoader（sun.misc.Launcher$ExtClassLoader） 实现的。它负责将<code>&lt; Java_Runtime_Home &gt;/lib/ext </code>或者由系统变量 java.ext.dir 指定位置中的类库加载到内存中。开发者可以直接使用标准扩展类加载器。</p>
+<h4 id="应用（App）类加载器"><a href="#应用（App）类加载器" class="headerlink" title="应用（App）类加载器"></a>应用（App）类加载器</h4><p>应用类加载器是由 Sun 的 AppClassLoader（sun.misc.Launcher$AppClassLoader）实现的。它负责将系统类路径（CLASSPATH）中指定的类库加载到内存中。开发者可以直接使用系统类加载器。</p>
+<h4 id="CustomClassLoader（用户自定义类加载器）"><a href="#CustomClassLoader（用户自定义类加载器）" class="headerlink" title="CustomClassLoader（用户自定义类加载器）"></a>CustomClassLoader（用户自定义类加载器）</h4><p><code>java</code>编写,用户自定义的类加载器,可加载指定路径的<code>class</code>文件</p>
+<h3 id="3-双亲委派机制"><a href="#3-双亲委派机制" class="headerlink" title="3. 双亲委派机制"></a>3. 双亲委派机制</h3><h4 id="上源码"><a href="#上源码" class="headerlink" title="上源码"></a>上源码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve) <span class="keyword">throws</span> ClassNotFoundException&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// 首先检查这个classsh是否已经加载过了</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// c==null表示没有加载，如果有父类的加载器则让父类加载器加载</span></span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//如果父类的加载器为空 则说明递归到bootStrapClassloader了</span></span><br><span class="line">                    <span class="comment">//bootStrapClassloader比较特殊无法通过get获取</span></span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;&#125;</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">//如果bootstrapClassLoader 仍然没有加载过，则递归回来，尝试自己去加载class</span></span><br><span class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="双亲委派是什么"><a href="#双亲委派是什么" class="headerlink" title="双亲委派是什么"></a>双亲委派是什么</h4><p>俗的讲，就是某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父类加载器，依次递归，如果父类加载器可以完成类加载任务，就成功返回；只有父类加载器无法完成此加载任务时，才自己去加载。关于虚拟机默认的双亲委派机制，我们可以从系统类加载器和标准扩展类加载器为例作简单分析。</p>
+<h4 id="类加载器模型图"><a href="#类加载器模型图" class="headerlink" title="类加载器模型图"></a>类加载器模型图</h4><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200719204659893.png" alt="image-20200719204659893" style="zoom: 67%;" />
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="https://littley98.github.io/index.html" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+        <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+        </div>
+        <div class="comments" id="comments">
+          
+
+        </div>
+      </div>
+    </div>
+   </div>
+</main>
+<div class="footer">
+  <div class="info">
+    <p>
+    <a target="_blank" rel="noopener" href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a target="_blank" rel="noopener" href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>
+      主题
+    </p>
+    <p>&copy;2020-2021 LittleY的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问 https://littley98.github.io/ ，围观LittleY的博客(づ｡◕‿‿◕｡)づ！\n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/./js/main.js"></script>
+
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
