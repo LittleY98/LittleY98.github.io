@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="hexo,个人博客,blog" />
+  <meta name="description" content="LittleY的个人博客" />
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>Java常用集合</title>
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/">LittleY&#39;Blog</a>
+  <a class="face-img" href="/">
+    <img src="https://avatars.githubusercontent.com/u/47181393?v=4">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    Java常用集合
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2021-05-21T07:17:56.000Z" itemprop="datePublished">2021-05-21</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2021-05-22T07:21:16.681Z" itemprop="dateUpdated">2021-05-22</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <h2 id="java常用集合集合"><a href="#java常用集合集合" class="headerlink" title="java常用集合集合"></a>java常用集合集合</h2><h3 id="1-Java集合分类"><a href="#1-Java集合分类" class="headerlink" title="1. Java集合分类"></a>1. Java集合分类</h3><p>Java常用集合主要分为<strong>Collection</strong>和<strong>Map</strong>两大类：</p>
+<ol>
+<li><p><strong>Collection</strong>：是单列集合的顶层父类，是一个独立元素的序列，这些个元素都服从一条或者多条规则。List必须按照插入的顺序保存元素，而Set不能有重复的元素。即Collection分为List和Set两大分支。</p>
+<p>(1) <strong>List集合</strong>是一个有序的队列，每一个元素都有他的索引。第一个元素的索引值为0。</p>
+<p>`      List的实现类有LinkedList、ArrayList、Vector、Stack。</p>
+<p>(2) <strong>Set集合</strong>是一个不允许有重复元素的集合。</p>
+<p>​        Set的实现类有HashSet、TreeSet。HashSet依赖于HashMap，他实际上是通过HashMap实现的；TreeSet依赖 于TreeMap，他实际是通过TreeMap实现的。</p>
+</li>
+<li><p><strong>Map</strong>：是双列集合的顶层父类接口，是一个映射接口，即key-Value键值对。允许使用键来查找对应的值，从某种意义上来说，他将数字和对象关联在一起。Map中的每一个元素包含”key”和”key对应的value”。</p>
+<p>(1) AbstractMap是一个抽象类，它实现了Map接口中的大部分API。二HashMap、TreeMap、WeakHashMap都是继承了AbstractMap。Hashtable虽然继承与Dictionary，但是他实现了Map接口。</p>
+</li>
+</ol>
+<img src="https://gitee.com/yangxun98/My_Images/raw/master/Spring_Theory/image-20200714205831974.png" alt="image-20200714205831974" style="zoom:67%;" />
+
+<h3 id="2-关于集合类-Collection"><a href="#2-关于集合类-Collection" class="headerlink" title="2. 关于集合类(Collection)"></a>2. 关于集合类(Collection)</h3><ol>
+<li>Collection是集合的父类，但是JDK不提供直接继承自Collection的集合类让用户使用，而是提供继承自Collection子接口List和Set的集合类让用户使用。 </li>
+<li>List和Set的区别，List提供了随机访问的方法，内部元素是有序的，并且允许为空；而实现Set接口的类，内部元素是无序的，并且最多只能有一个null元素，并且放入Set中的元素必须不相等，就是要满足e1.equals(e2)==false，另外必须小心操作可变对象，当Set中的可变对象被操作后使得Set中有两个元素满足了e1.equals(e2)==true时就会发生一些问题。</li>
+<li>ArrayList类。ArrayList实现了可变大小的数组。它允许所有元素，包括null。ArrayList没有同步。每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。</li>
+<li>LikedList。它内部的结构是基于链表的。LinkedList实现了List接口，允许null元素。此外LinkedList实现了Deque<E>, Queue<E>接口，提供额外的get，remove，insert方法在LinkedList的首部或尾部。所以LinkedList可以用来实现队列操作。它也是非同步的。</li>
+<li>Vector。它与ArrayList非常相似，但是Vector是同步的。</li>
+<li>HashSet。它内部是使用Hash表来存放元素的，通过HashMap来实现的。元素</li>
+</ol>
+<h3 id="3-关于容器类-Map"><a href="#3-关于容器类-Map" class="headerlink" title="3. 关于容器类(Map)"></a>3. 关于容器类(Map)</h3><ol>
+<li>容器的父接口是Map，它提供了键值对的数据结构。</li>
+<li>HashMap。跟HashSet相似，它也是基于Hash函数的，所以作为HashMap的键值的类，必须重写hash和equals方法。它是非同步的，允许null的key和null的value。</li>
+<li>Hashtable。它也是实现Map的一个子类，它跟HashMap非常相似，但是Hashtable是同步的，并且不允许有null的key和null的value。</li>
+<li>TreeMap。内部结构是基于红黑树的，内部的键值集合是有序的，可以进行基于有序的相关操作，其他操作跟HashMap相似。</li>
+<li>WeakHashMap。该类与HashMap相似，只是它对key实行“弱引用”，如果一个key不再被外部所引用，那么该key可以被GC回收。</li>
+</ol>
+<h3 id="4-关于Collections类"><a href="#4-关于Collections类" class="headerlink" title="4. 关于Collections类"></a>4. 关于Collections类</h3><p>这是一个工具类，它的静态方法一般用来处理集合容器类，或者用来生产集合容器类。Collections.synchronizedXXX()方法可以从非同步的集合容器类获得同步的集合容器类。</p>
+<h3 id="5-关于Arrays类"><a href="#5-关于Arrays类" class="headerlink" title="5. 关于Arrays类"></a>5. 关于Arrays类</h3><p>Arrays类提供了很多处理数组相关的静态方法，如数组的查找、比较、排序等操作。另外该类还提供了一个静态方法，将数组转换成List，该方法就是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.asList(T ... array);</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-同步的集合类以及容器类（Synchronized）"><a href="#6-同步的集合类以及容器类（Synchronized）" class="headerlink" title="6. 同步的集合类以及容器类（Synchronized）"></a>6. 同步的集合类以及容器类（Synchronized）</h3><p>一般的集合类和容器类都是非同步的（除了Vector和Hashtable以及它们的子类），如果用在多线程环境下必须自己写有关同步的代码。JDK中为我们提供了与一般集合容器类相应的同步类，SynchronizedCollection<E>、SynchronizedList<E>、SynchronizedMap<E>、SynchronizedSet<E>、SynchronizedSortedSet<E>、SynchronizedMap<E>，这些类都是Collections类中的静态内部类，通过Collections.synchronizedXXX()方法就可以获得相关的同步集合容器类，并且得到的同步类与作为参数的非同步类共享数据空间，当在同步类中对集合或者容器做出修改，在非同步的类中能同步感受到。例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt; String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">List&lt;String&gt; list1 = Collections.synchronizedList(list);</span><br><span class="line">list1.remove(<span class="number">0</span>);</span><br><span class="line">System.out.println(list.size());</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述代码输出结果为0</p>
+</blockquote>
+<h3 id="7-并发的集合类以及容器类"><a href="#7-并发的集合类以及容器类" class="headerlink" title="7. 并发的集合类以及容器类"></a>7. 并发的集合类以及容器类</h3><ol>
+<li>同步集合或容器中，基本上在内部是使用synchronized来实现的，而且一个类中所有的方法使用的是同一个锁对象，在很多这会造成性能上的问题。另外，有一些复合操作，需要保持原子性，如获取最后一个元素（代码见下面），而同步类这时候就做不到了，所以这时候要考虑使用并发类了，并发类位于java.util.concurrent中。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*获取最后一个元素</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">getLast</span><span class="params">(Vector list)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> lastIndex = list.size() - <span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">return</span> list.get(lastIndex);  </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>并发容器有ConcurrentHashMap，它采用更细粒度的锁，被称为分段锁，允许一定数量的线程并发的修改它，能够提供高并发的性能。</li>
+<li>还有一些有用的适用于某些并发场合的集合类，CopyOnWriteArrayList等。</li>
+<li>在这里只要Java中存在同步集合容器和并发集合容器类就可以了，当遇到多线程的情况或者要求并发的情况下，再去找相关的合适的同步或并发的集合容器类。</li>
+</ol>
+<h3 id="8-UML图"><a href="#8-UML图" class="headerlink" title="8. UML图"></a>8. UML图</h3><img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200714210622546.png" alt="image-20200714210622546" style="zoom: 80%;" />
+
+<img src="https://gitee.com/littley98/My_Images/raw/master/Spring_Theory/image-20200714210622546.png" alt="image-20200714210622546" style="zoom: 80%;" />
+
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+        <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+        </div>
+        <div class="comments" id="comments">
+          
+
+        </div>
+      </div>
+    </div>
+   </div>
+</main>
+<div class="footer">
+  <div class="info">
+    <p>
+    <a target="_blank" rel="noopener" href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a target="_blank" rel="noopener" href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>
+      主题
+    </p>
+    <p>&copy;2020-2021 LittleY的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问 https://littley98.github.io/ ，围观LittleY的博客(づ｡◕‿‿◕｡)づ！\n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/./js/main.js"></script>
+
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
