@@ -674,7 +674,7 @@ zrange key start stop [withscores]
 zrevrange key start stop [withscores]
 
 # 9. 根据score的范围获取member(limit和MySQL中用法一致)
-zrangebyscore key min max [withscores] [limit offset count]
+ key min max [withscores] [limit offset count]
 
 # 10. 根据score的范围获取member
 zrevrangebyscore key max min [withscores] [limit offset count]
@@ -740,7 +740,20 @@ monitor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <h3 id="4-3、Jedis如何以Json-String的形式存储一个对象到Redis"><a href="#4-3、Jedis如何以Json-String的形式存储一个对象到Redis" class="headerlink" title="4.3、Jedis如何以Json String的形式存储一个对象到Redis"></a>4.3、Jedis如何以Json String的形式存储一个对象到Redis</h3><blockquote>
 <p>创建对象后转为json字符串，再存到Redis即可，取出时再由json转为对象</p>
 </blockquote>
-<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f6848546444464a6953336e56654e322e706e67.png" alt="image-20201228094625249"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">//1、链接Redis</span>
+  <span class="token class-name">Jedis</span> jedis <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Jedis</span><span class="token punctuation">(</span><span class="token string">"192.168.1.1"</span><span class="token punctuation">,</span><span class="token number">6379</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//2.1 准备key</span>
+  <span class="token class-name">String</span> stringKey <span class="token operator">=</span> <span class="token string">"stringUser"</span><span class="token punctuation">;</span>
+  <span class="token comment">//2.2 使用fastJSON将value转化为JSON字符串</span>
+  <span class="token class-name">String</span> stringValue <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//2.3 存储到Redis中</span>
+  jedis<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>stringKey<span class="token punctuation">,</span>stringValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//3、释放资源</span>
+  jedis<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="4-4、使用Jedis连接池"><a href="#4-4、使用Jedis连接池" class="headerlink" title="4.4、使用Jedis连接池"></a>4.4、使用Jedis连接池</h3><blockquote>
 <p><strong>jedis连接资源的创建与销毁是很消耗程序性能</strong>，所以jedis为我们提供了jedis的<strong>池化技术</strong>，</p>
 <p>jedisPool在创建时初始化一些连接资源存储到连接池中，使用jedis连接资源时不需要创建，</p>
