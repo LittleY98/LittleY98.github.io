@@ -1,0 +1,2014 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="Redis笔记, LittleY&#39;Blog">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Redis笔记 | LittleY&#39;Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+
+   <style>
+    body{
+       background-image: url(http://img.pptjia.com/image/20190108/9ec44adb1dde6b9113c773744c6b5e9f.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LittleY&#39;Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友人帐</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/navigate" class="waves-effect waves-light">
+      
+      <i class="fas fa-location-arrow" style="zoom: 0.6;"></i>
+      
+      <span>导航</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LittleY&#39;Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友人帐
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/navigate" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-location-arrow"></i>
+			
+			导航
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Redis笔记</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                数据库
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-06-11
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Redis学习笔记"><a href="#Redis学习笔记" class="headerlink" title="Redis学习笔记"></a>Redis学习笔记</h1><h2 id="一、Redis介绍"><a href="#一、Redis介绍" class="headerlink" title="一、Redis介绍"></a>一、Redis介绍</h2><h3 id="1-1、引言"><a href="#1-1、引言" class="headerlink" title="1.1、引言"></a>1.1、引言</h3><blockquote>
+<ol>
+<li>由于用户量增大，请求数量也随之增大，数据压力过大</li>
+<li>多台服务器之间，数据不同步</li>
+<li>多台服务器之间的锁， 已经不存在互斥性了</li>
+</ol>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f69646836334c626b6e6d6a327166792e706e67.png" alt="image-20201224092558107"></p>
+<h3 id="1-2、NoSQL"><a href="#1-2、NoSQL" class="headerlink" title="1.2、NoSQL"></a>1.2、NoSQL</h3><blockquote>
+<p>Redis就是一款NoSQL</p>
+<p>NoSQL–&gt;非关系型数据库–&gt;Not Only SQL</p>
+<ol>
+<li>Key-Value：Redis</li>
+<li>文档型：ElasticSearch, Solr, Mongodb</li>
+<li>面向列：Hbase，Cassandra</li>
+<li>图形化：Neo4j</li>
+</ol>
+<p>除了关系型数据库都是非关系型数据库</p>
+<p>NoSQL只是一种概念，泛指非关系型数据库</p>
+</blockquote>
+<h3 id="1-3、Redis介绍"><a href="#1-3、Redis介绍" class="headerlink" title="1.3、Redis介绍"></a>1.3、Redis介绍</h3><blockquote>
+<p>意大利人，在开发款LLOOGG的统计页面，因为MySQL性能不好，自己研发了一款非关系型数据库，并命名为Redis。</p>
+<p>Redis（Remote Dictionary Server）即远程字典服务，Redis是由C语言编写，是一款基于Key-Value的NoSQL，其基于内存存储数据，提供多种持久化机制，性能：读取数据可达110000次/s，写入数据可达81000次/s，Redis还提供了主从、哨兵以及集群的搭建方式，可以更方便地横向扩展以及垂直扩展。</p>
+</blockquote>
+<h2 id="二、Redis安装"><a href="#二、Redis安装" class="headerlink" title="二、Redis安装"></a>二、Redis安装</h2><h3 id="2-1、安装Redis"><a href="#2-1、安装Redis" class="headerlink" title="2.1、安装Redis"></a>2.1、安装Redis</h3><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;3.1&#39;
+services:
+  redis:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 6379:6379<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-2、使用redis-cli连接Redis"><a href="#2-2、使用redis-cli连接Redis" class="headerlink" title="2.2、使用redis-cli连接Redis"></a>2.2、使用redis-cli连接Redis</h3><blockquote>
+<p>进去redis容器内部：docker exec -it 容器id bash</p>
+<p>在容器内部，使用redis-cli连接</p>
+</blockquote>
+<h3 id="2-3、使用图形化界面连接Redis"><a href="#2-3、使用图形化界面连接Redis" class="headerlink" title="2.3、使用图形化界面连接Redis"></a>2.3、使用图形化界面连接Redis</h3><blockquote>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/lework/RedisDesktopManager-Windows/releases">Releases · lework/RedisDesktopManager-Windows (github.com)</a></p>
+<p>安装后，连接时IP改为云服务器IP即可</p>
+</blockquote>
+<h2 id="三、Redis常用命令"><a href="#三、Redis常用命令" class="headerlink" title="三、Redis常用命令"></a>三、Redis常用命令</h2><h3 id="3-1、Redis存储数据的结构"><a href="#3-1、Redis存储数据的结构" class="headerlink" title="3.1、Redis存储数据的结构"></a>3.1、Redis存储数据的结构</h3><blockquote>
+<p>常用的5种数据结构</p>
+<ul>
+<li>key-string：一个key对应一个值</li>
+<li>key-hash：一个key对应一个Map</li>
+<li>key-list：一个key对应一个列表</li>
+<li>key-set：一个key对应一个集合</li>
+<li>key-zset：一个key对应一个有序的集合</li>
+</ul>
+<p>另外三种数据结构</p>
+<p>HyperLogLog：计算近似值</p>
+<p>GEO：存储地理位置</p>
+<p>BIT：通过byte数组来存储</p>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f4e796c61584c7562427a6a544639682e706e67.png" alt="image-20201224164949920"></p>
+<blockquote>
+<p>key-string：最常用，一般用于存储单个值</p>
+<p>key-hash：存储一个对象数据</p>
+<p>key-list：使用list结构实现栈和队列结构</p>
+<p>key-set：交集，差集和并集的操作</p>
+<p>key-zset：常用于排行榜，积分存储等操作</p>
+</blockquote>
+<h3 id="3-2、string常用命令"><a href="#3-2、string常用命令" class="headerlink" title="3.2、string常用命令"></a>3.2、string常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 添加值，如果key已经存在，就覆盖
+set key value
+
+# 2. 取值
+get key
+
+# 3. 批量操作
+mset key value [key value ...]
+mget key [key ...]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 4. 自增命令
+inc key
+
+# 5. 自减命令
+decr key
+
+# 6. 自增或自减指定数量
+incrby key increment
+decrby key increment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 7. 设置值的同时，指定其生存时间（推荐使用）
+setex key second value
+
+# 8. 设置值，如果key已存在，则跳过，否则和set命令一样
+setnx key value
+
+# 9. 在key对应的value后，追加内容
+append key value
+
+# 10. 查看value字符串的长度
+strlen key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-3、hash常用命令"><a href="#3-3、hash常用命令" class="headerlink" title="3.3、hash常用命令"></a>3.3、hash常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 存储数据
+hset key field value
+
+# 2. 获取数据
+hget key field 
+
+# 3. 批量操作
+hmset key field value [field value ...]
+hmget key field [field ...]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 4. 自增(increment可以为正，也可以为负)
+hincrby key field increment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 5. 设置值(如果key-field不存在，则正常添加，如果存在，就跳过)
+hsetnx key field value
+
+# 6. 检查field是否存在
+hexists key field
+
+# 7. 删除key对应的field，可以删除多个
+hdel key field [field ...]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 8. 获取当前hash结构中的全部field和value
+hgetall key # py: dict.items()
+
+# 9. 获取当前hash结构中的全部field
+hkeys key # py: dict.keys()
+
+# 10. 获取当前hash结构中的全部value
+hvals key # py: dict.vals()
+
+# 11. 获取当前hash结构中field的数量
+hlen key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-4、list常用命令"><a href="#3-4、list常用命令" class="headerlink" title="3.4、list常用命令"></a>3.4、list常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 存储数据(从左侧插入，从右侧插入)
+lpush key value [value ...]
+rpush key value [value ...]
+
+# 2. 存储数据(如果key不存在或者key不是list结构，则跳过;无法批量操作)
+lpushx key value
+rpushx key value
+
+# 3. 存储数据(修改指定位置的数据)
+lset key index value<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 4. 弹栈方式获取数据
+lpop key
+rpop key
+
+# 5. 获取指定索引范围的数据(start从0开始，stop支持负数，如-1；两边都是闭)
+lrange key start stop
+
+# 6. 获取指定索引位置的数据
+lindex key index
+
+# 7. 获取整个列表的长度
+llen key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 8. 删除列表中的数据(删除count个相应value值，count&lt;0时，从右向左删除，count&#x3D;0时删除全部数据)
+lrem key count value
+
+# 9. 保留列表中的数据
+ltrim key start stop
+
+# 10. 将list1中的队尾(最右)，插入到list2头部(最左)
+rpoplpush list1 list2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-5、set常用命令"><a href="#3-5、set常用命令" class="headerlink" title="3.5、set常用命令"></a>3.5、set常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 存储数据
+sadd key member [member ...]
+
+# 2. 获取数据（获取全部数据）
+smembers key
+
+# 3. 随机获取一个数据（获取的同时，移除数据，count默认为1，代表弹出数据的数量）
+spop key [count]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 4. 交集
+sinter set1 set2 ...
+
+# 5. 并集
+sunion set1 set2 ...
+
+# 6. 差集(set1-set2-...)
+sdiff set1 set2 ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 7. 删除数据
+srem key member [member ...]
+
+# 8. 查看当前的set集合中是否包含这个值
+sismember key member<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-6、zset常用命令"><a href="#3-6、zset常用命令" class="headerlink" title="3.6、zset常用命令"></a>3.6、zset常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 添加数据(score必须是数值，member不允许重复)
+zadd key score member [score member ...]
+
+# 2. 修改member的分数(如果member不存在，会先添加该member)
+zincrby key score member<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 3. 查看指定的member的分数
+zscore key member
+
+# 4. 获取zset中member的数量
+zcard key
+
+# 5. 根基score的范围查询member数量
+zcount key min max
+
+# 6. 删除zset中的成员
+zrem key member [member ...]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 7. 根据分数从小到大排序，获取指定范围内的数据(withscore表示返回时，会返回member对应分数)
+zrange key start stop [withscores]
+
+# 8. 根据分数从大到小排序，获取指定范围内的数据
+zrevrange key start stop [withscores]
+
+# 9. 根据score的范围获取member(limit和MySQL中用法一致)
+zrangebyscore key min max [withscores] [limit offset count]
+
+# 10. 根据score的范围获取member
+zrevrangebyscore key max min [withscores] [limit offset count]
+
+# some examples
+zrangebyscore salary 3000 10000  # 左右都闭
+zrangebyscore salary (3000 10000 # 左开右闭
+zrangebyscore salary -inf +inf	 # 查询全部<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-7、key常用命令"><a href="#3-7、key常用命令" class="headerlink" title="3.7、key常用命令"></a>3.7、key常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 查看Redis中全部的key (pattern: *, xxx*, *xxx)
+ keys pattern
+ 
+ # 2. 查看某一个key是否存在(1-存在，0-不存在)
+ exists key
+ 
+ # 3. 删除key
+ del key [key ...]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 4. 设置key的生存时间，单位为秒或毫秒
+expire key second
+pexpire key milliseconds
+
+# 5. 设置key的生存时刻，单位为秒或毫秒
+expireat key timestamp
+pexpireat key milliseconds-timestamp
+
+# 6. 查看key的剩余生存时间，单位为秒或毫秒(-2:当前key不存在，-1:key未设置生存时间)
+ttl key
+pttl key
+
+# 7. 移除key的生存时间(1-移除成功，0-key未设置生存时间或key不存在)
+persist key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 8. 选择操作的库(redis默认有16个库，编号0-15，默认选择0号库)
+select 0-15
+
+# 9. 移动key到另一个库中
+move key db<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-8、库的常用命令"><a href="#3-8、库的常用命令" class="headerlink" title="3.8、库的常用命令"></a>3.8、库的常用命令</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 1. 清空当前所在的数据库
+flushdb
+
+# 2. 清空全部数据库
+flushall
+
+# 3. 查看当前数据库中有多少个key
+dbsize
+
+# 4. 查看最后一次操作的时间(准确说是最后一次操作磁盘的时间)
+lastsave
+
+# 5. 实时监控Redis服务接收到的操作命令
+monitor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="四、Java连接Redis"><a href="#四、Java连接Redis" class="headerlink" title="四、Java连接Redis"></a>四、Java连接Redis</h2><blockquote>
+<p>通过Jedis连接和操作，操作完记得释放资源</p>
+</blockquote>
+<h3 id="4-1、Jedis连接Redis"><a href="#4-1、Jedis连接Redis" class="headerlink" title="4.1、Jedis连接Redis"></a>4.1、Jedis连接Redis</h3><h3 id="4-2、Jedis如何存储一个对象到Redis"><a href="#4-2、Jedis如何存储一个对象到Redis" class="headerlink" title="4.2、Jedis如何存储一个对象到Redis"></a>4.2、Jedis如何存储一个对象到Redis</h3><blockquote>
+<p>以byte[]的形式存储，通过序列化和反序列化即可</p>
+</blockquote>
+<h3 id="4-3、Jedis如何以Json-String的形式存储一个对象到Redis"><a href="#4-3、Jedis如何以Json-String的形式存储一个对象到Redis" class="headerlink" title="4.3、Jedis如何以Json String的形式存储一个对象到Redis"></a>4.3、Jedis如何以Json String的形式存储一个对象到Redis</h3><blockquote>
+<p>创建对象后转为json字符串，再存到Redis即可，取出时再由json转为对象</p>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f6848546444464a6953336e56654e322e706e67.png" alt="image-20201228094625249"></p>
+<h3 id="4-4、使用Jedis连接池"><a href="#4-4、使用Jedis连接池" class="headerlink" title="4.4、使用Jedis连接池"></a>4.4、使用Jedis连接池</h3><blockquote>
+<p><strong>jedis连接资源的创建与销毁是很消耗程序性能</strong>，所以jedis为我们提供了jedis的<strong>池化技术</strong>，</p>
+<p>jedisPool在创建时初始化一些连接资源存储到连接池中，使用jedis连接资源时不需要创建，</p>
+<p>而是从连接池中获取一个资源进行redis的操作，使用完毕后，不需要销毁该jedis连接资源，</p>
+<p>而是将该资源归还给连接池，供其他请求使用。</p>
+</blockquote>
+<blockquote>
+<p>1、简单方式</p>
+</blockquote>
+<blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f41647233564e444c4a7570695a65472e706e67.png" alt="image-20201228094853644">设置配置信息，再创建连接处</p>
+<p>maxIdle 连接池中最多可空闲maxIdle个连接 ，若取值为20，表示即使没有数据库连接时依然可以保持20空闲的连接，而不被清除，随时处于待命状态。设 0 为没有限制。</p>
+<p>maxIdle通常和maxTotal设置为同一个值</p>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f376564523263546f6c4d4a786743762e706e67-20210611123451495.png" alt="image-20201228095634165"></p>
+<p>其他步骤同上。</p>
+<h3 id="4-5、Redis的管道操作"><a href="#4-5、Redis的管道操作" class="headerlink" title="4.5、Redis的管道操作"></a>4.5、Redis的管道操作</h3><blockquote>
+<p>在操作Redis时，每执行一条命令需要先发送请求到Redis服务器，这个过程要经过网络延迟，Redis还需要给客户端一个响应。</p>
+<p>如果需要一次性执行多个命令，上述方式效率低，可以通过Redis的管道，先将命令全部放到客户端的一个pipeline中，再一次性将这些命令发送到Redis服务器，Redis也可以一次性返回全部命令执行后的响应结果</p>
+</blockquote>
+<h2 id="五、Redis其他配置及集群"><a href="#五、Redis其他配置及集群" class="headerlink" title="五、Redis其他配置及集群"></a>五、Redis其他配置及集群</h2><blockquote>
+<p>修改.yml文件，做数据集映射，方便后期修改Redis配置信息</p>
+</blockquote>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;3.1&#39;
+services:
+  redis:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 6379:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-1、Redis的AUTH"><a href="#5-1、Redis的AUTH" class="headerlink" title="5.1、Redis的AUTH"></a>5.1、Redis的AUTH</h3><blockquote>
+<p>方式一：通过修改Redis的配置文件，实现Redis的密码校验</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none"># redis.conf
+requirepass 密码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>三种客户端的连接方式</p>
+<ol>
+<li><p>redis-cli：在输入正常命令之前，先输入auth密码即可</p>
+</li>
+<li><p>图形化界面，在连接Redis的信息中添加上密码</p>
+</li>
+<li><p>Jedis客户端：</p>
+<p>第一种：jedis.auth(password);</p>
+<p>第二种：使用JedisPool的方式，选择带密码参数的构造函数即可</p>
+</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>方式二：在不修改redis.conf文件的前提下，在第一次连接Redis时，输入命令</p>
+<p>Config set requirepass 密码</p>
+<p>后续执行操作时，就需要输入auth校验。</p>
+</blockquote>
+<h3 id="5-2、Redis的事务"><a href="#5-2、Redis的事务" class="headerlink" title="5.2、Redis的事务"></a>5.2、Redis的事务</h3><blockquote>
+<p>Redis的事务：一次事务操作，该成功的成功，该失败的失败</p>
+<p>先开启事务，执行一系列的命令，但是命令不会立即执行，会被放在一个队列中，如果你执行事务，那么这个队列中的命令全部执行，如果取消了事务，一个队列中的命令全部作废。</p>
+<ol>
+<li>开启事务：multi</li>
+<li>输入要执行的命令：被放入到一个队列中</li>
+<li>执行事务：exec</li>
+<li>取消事务：discard</li>
+</ol>
+<p>Redis的事务想发挥功能，需要配置watch监听机制</p>
+<ol>
+<li>watch key [key …]</li>
+<li>unwatch key [key …]</li>
+</ol>
+<p>在开启事务之前，先通过watch命令去监听一个或多个key，在开启事务之后，如果有其他客户端修改了我监听的key，事务会自动取消</p>
+<p>如果执行了事务，或者取消了事务，watch监听自动消除，一般不需要手动执行unwatch</p>
+</blockquote>
+<h3 id="5-3、Redis持久化机制"><a href="#5-3、Redis持久化机制" class="headerlink" title="5.3、Redis持久化机制"></a>5.3、Redis持久化机制</h3><blockquote>
+<p>RDB是Redis默认的持久化机制</p>
+<ol>
+<li>RDB持久化文件，速度较快，以二进制文件存储，传输方便</li>
+<li>RDB无法保证数据的绝对完全</li>
+</ol>
+</blockquote>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">save 900 1       # 在900秒内，有1个key改变了，就执行RDB持久化
+save 300 10		 # 在300秒内，有10个key改变了，就执行RDB持久化
+save 60 10000    # 在60秒s，有10000个key改变了，就执行RDB持久化
+
+rdbcompression yes	# 开启持久化压缩
+
+dbfilename dump.rdb # 持久化文件名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<blockquote>
+<p>AOF持久化机制默认是关闭的，Redis官方推荐同时开启RDB和AOF，更安全</p>
+<ol>
+<li>AOF持久化的速度，相对RDB较慢，存储一个文本文件，后期文件体积可能较大，传输困难</li>
+<li>AOF持久化时机。（下方代码块后三行）</li>
+<li>AOF相对RDB更安全，推荐两者同时开启。</li>
+</ol>
+</blockquote>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">appendonly no         # no表示关闭aof，yes表示开启aof
+appendfilename &quot;appendonly.aof&quot;  # aof持久化文件名称
+appendfsync always    # 每执行一个写操作，立即持久化到AOF文件中，性能比较低
+appendfsync everysec  # 每秒执行一次持久化
+appendfsync no        # 根据系统环境不同，在一定时间内执行一次持久化<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<blockquote>
+<p>同时开启AOF和RDB的注意事项（建议操作之前两者都开）</p>
+<p>如果同时开启了AOF和RDB持久化，那么Redis宕机重启后，会优先加载AOF的持久化文件。</p>
+<p>如果先开启了RDB，再次开启AOF，如果RDB执行了持久化，那么RDB文件中的内容会被AOF覆盖掉。</p>
+</blockquote>
+<h3 id="5-4、Redis的主从架构"><a href="#5-4、Redis的主从架构" class="headerlink" title="5.4、Redis的主从架构"></a>5.4、Redis的主从架构</h3><blockquote>
+<p>单个Redis存在读写瓶颈的问题</p>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f4f4a6a394344676c6e624e335836742e706e67.png" alt="image-20201229102735599"></p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;3.1&#39;
+services:
+  redis1:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis1
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7001:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis1.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis2:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis2
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7002:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis2.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    links:
+      - redis1:master
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis3:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis3
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7003:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis3.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    links:
+      - redis1:master
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-none"><code class="language-none"># 从节点配置 replica of
+replicaof &lt;masterip&gt; &lt;masterport&gt; # 对于本例，即为 replicaof master 6379<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="5-5、哨兵"><a href="#5-5、哨兵" class="headerlink" title="5.5、哨兵"></a>5.5、哨兵</h3><blockquote>
+<p>哨兵可以帮助我们解决主从架构中的单点故障问题</p>
+</blockquote>
+<blockquote>
+<p>修改主从架构配置文件</p>
+</blockquote>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;3.1&#39;
+services:
+  redis1:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis1
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7001:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis1.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+      - .&#x2F;conf&#x2F;sentinel1.conf:&#x2F;data&#x2F;sentinel.conf    # 修改处
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis2:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis2
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7002:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis2.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+      - .&#x2F;conf&#x2F;sentinel2.conf:&#x2F;data&#x2F;sentinel.conf    # 修改处
+    links:
+      - redis1:master
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis3:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis3
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7003:6379
+    volumes:
+      - .&#x2F;conf&#x2F;redis3.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+      - .&#x2F;conf&#x2F;sentinel3.conf:&#x2F;data&#x2F;sentinel.conf    # 修改处
+    links:
+      - redis1:master
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>准备哨兵的配置文件，并且在容器内部手动启动哨兵即可</p>
+</blockquote>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 哨兵需要后台启动
+daemonize yes
+# 指定Master节点的ip和端口(主)
+sentinel monitor master localhost 6379 2
+# 指定Master节点的ip和端口(从)
+sentinel monitor master ip地址 6379 2
+# 哨兵每隔多久监听一次redis架构
+sentinel down-after-milliseconds master 10000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>在Redis容器内部启动sentinel即可</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">redis-sentinel sentinel.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-6、Redis集群"><a href="#5-6、Redis集群" class="headerlink" title="5.6、Redis集群"></a>5.6、Redis集群</h3><blockquote>
+<p>Redis集群在保证主从加哨兵的基本功能之外，还能够提升Redis存储数据的能力</p>
+</blockquote>
+<blockquote>
+<p>Redis集群的特点：</p>
+<ol>
+<li>Redis集群是无中心的</li>
+<li>Redis集群有一个ping-pong的机制</li>
+<li>投票机制，Redis集群节点的数量必须是2n+1</li>
+<li>Redis集群中默认分配了16384个hash槽，在存储数据时，就会将key进行crc16的算法，并且对16384取余，根据最终的结果，将key-value存放到执行Redis节点中，而且每一个Redis集群都在维护着相应的hash槽</li>
+<li>为了保证数据的安全性，集群中的每一个节点，至少都要跟着一个从节点</li>
+<li>可以单独地针对Redis集群中的某一个节点搭建主从</li>
+<li>当Redis集群中超过半数的节点宕机之后，Redis集群就瘫痪了</li>
+</ol>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f67625870564d734e6a4a50375446522e706e67.png" alt="image-20201231094420587"></p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># docker-compose.yml
+version: &quot;3.1&quot;
+services:
+  redis1:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis1
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7001:7001
+      - 17001:17001
+    volumes:
+      - .&#x2F;conf&#x2F;redis1.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis2:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis2
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7002:7002
+      - 17002:17002
+    volumes:
+      - .&#x2F;conf&#x2F;redis2.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis3:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis3
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7003:7003
+      - 17003:17003
+    volumes:
+      - .&#x2F;conf&#x2F;redis1.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis4:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis4
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7004:7004
+      - 17004:17004
+    volumes:
+      - .&#x2F;conf&#x2F;redis4.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis5:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis5
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7005:7005
+      - 17005:17005
+    volumes:
+      - .&#x2F;conf&#x2F;redis5.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]
+  redis6:
+    image: daocloud.io&#x2F;library&#x2F;redis:5.0.7
+    restart: always
+    container_name: redis6
+    environment:
+      - TZ&#x3D;Asia&#x2F;Shanghai
+    ports:
+      - 7006:7006
+      - 17006:17006
+    volumes:
+      - .&#x2F;conf&#x2F;redis6.conf:&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf
+    command: [&quot;redis-server&quot;,&quot;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;redis.conf&quot;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># redis.conf
+# 指定redis的端口号
+port 7001
+# 开启Redis集群
+cluster-enbaled yes
+# 集群信息的文件
+cluster-config-file nodes-7001.conf
+# 集群的对外ip地址
+cluster-announce-ip 192.168.199.109
+# 集群对外的port
+cluster-announce-port 7001
+# 集群的总线端口
+cluster-announce-bus-port 17001<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<blockquote>
+<p>启动了6个Redis的节点</p>
+<p>随便跳转到其中一个容器内部，使用redis-cli管理集群</p>
+<p>cluster-replicas参数指定每个主节点跟几个从节点</p>
+</blockquote>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">redis-cli --cluster create 47.106.189.246:7001 47.106.189.246:7002 47.106.189.246:7003 47.106.189.246:7004 47.106.189.246:7005 47.106.189.246:7006 --cluster-replicas 1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-7、Java连接Redis集群"><a href="#5-7、Java连接Redis集群" class="headerlink" title="5.7、Java连接Redis集群"></a>5.7、Java连接Redis集群</h3><blockquote>
+<p>使用JedisCluster对象连接Redis集群</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token comment">// 创建Set&lt;HostAndPort> nodes</span>
+    <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">HostAndPort</span><span class="token punctuation">></span></span> nodes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HostAndPort</span><span class="token punctuation">(</span><span class="token string">"47.106.189.246"</span><span class="token punctuation">,</span> <span class="token string">"7001"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HostAndPort</span><span class="token punctuation">(</span><span class="token string">"47.106.189.246"</span><span class="token punctuation">,</span> <span class="token string">"7002"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HostAndPort</span><span class="token punctuation">(</span><span class="token string">"47.106.189.246"</span><span class="token punctuation">,</span> <span class="token string">"7003"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HostAndPort</span><span class="token punctuation">(</span><span class="token string">"47.106.189.246"</span><span class="token punctuation">,</span> <span class="token string">"7004"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HostAndPort</span><span class="token punctuation">(</span><span class="token string">"47.106.189.246"</span><span class="token punctuation">,</span> <span class="token string">"7005"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HostAndPort</span><span class="token punctuation">(</span><span class="token string">"47.106.189.246"</span><span class="token punctuation">,</span> <span class="token string">"7006"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 创建JedisCluster对象</span>
+    <span class="token class-name">JedisCluster</span> jedisCluster <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JedisCluster</span><span class="token punctuation">(</span>nodes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 操作</span>
+    <span class="token class-name">String</span> value <span class="token operator">=</span> jedisCluster<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="六、Redis常见问题"><a href="#六、Redis常见问题" class="headerlink" title="六、Redis常见问题"></a>六、Redis常见问题</h2><h3 id="6-1、Redis的删除策略"><a href="#6-1、Redis的删除策略" class="headerlink" title="6.1、Redis的删除策略"></a>6.1、Redis的删除策略</h3><blockquote>
+<p>key的生存时间到了，Redis就会立即删除吗？</p>
+</blockquote>
+<blockquote>
+<p>不会立即删除。</p>
+<ol>
+<li><p>定期删除：</p>
+<p>Redis每隔一段时间就会去查看Redis设置了过期时间的key，会在100ms的间隔中默认查看3个key</p>
+</li>
+<li><p>惰性删除：</p>
+<p>如果当你去查询一个设置了生存时间的key时，Redis会先查看当前key的生存时间是否依旧到了，到了的话就直接删除当前key，并返回给用户一个空值</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="6-2、Redis的淘汰机制"><a href="#6-2、Redis的淘汰机制" class="headerlink" title="6.2、Redis的淘汰机制"></a>6.2、Redis的淘汰机制</h3><blockquote>
+<p>在Redis的内存满时，若添加新的数据，会触发淘汰机制。</p>
+</blockquote>
+<blockquote>
+<ol>
+<li><p>volatile-lru：</p>
+<p>在内存不足时，Redis会在设置了生存时间的key中淘汰一个最近最少使用的key</p>
+</li>
+<li><p>allkeys-lru：</p>
+<p>在内存不足时，Redis会在全部的key中淘汰一个最近最少使用的key</p>
+</li>
+<li><p>volatile-lfu：</p>
+<p>在内存不足时，Redis会在设置了生存时间的key中淘汰一个最近最少频次使用的key</p>
+</li>
+<li><p>allkeys-lfu：</p>
+<p>在内存不足时，Redis会在全部的key中淘汰一个最近最少频次使用的key</p>
+</li>
+<li><p>volatile-random：</p>
+<p>在内存不足时，Redis会在设置了生存时间的key中随机淘汰一个key</p>
+</li>
+<li><p>allkeys-random：</p>
+<p>在内存不足时，Redis会在全部的key中随机淘汰一个key</p>
+</li>
+<li><p>volatile-ttl：</p>
+<p>在内存不足时，Redis会在设置了生存时间的key中随机淘汰一个剩余生存时间最少的key</p>
+</li>
+<li><p>noeviction：(eviction 驱逐)</p>
+<p>当内存不足时，直接报错</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>指定淘汰机制的方式：maxmemory-policy 具体策略名称</p>
+<p>设置Redis的最大内存：maxmemory <bytes></bytes></p>
+</blockquote>
+<h3 id="6-3、缓存的常见问题"><a href="#6-3、缓存的常见问题" class="headerlink" title="6.3、缓存的常见问题"></a>6.3、缓存的常见问题</h3><blockquote>
+<p>缓存穿透问题：</p>
+<p>原因：客户端查询的数据，在Redis中没有，在数据库中也没有</p>
+<p>解决方案：</p>
+<ol>
+<li>根据id查询时，如果id是自增的，就将id的最大值放到Redis中，如果查询的id过大，就不用再查询数据库</li>
+<li>如果id不是整型，可以将全部的id放到set中，在用户查询时，在set中先查看是否有该id即可</li>
+<li>获取客户端的ip地址，可以对ip添加访问限制 (比如限制1min内最多访问60次)</li>
+</ol>
+</blockquote>
+<p><img src="https://gitee.com/LittleY98/My_Images/raw/master/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30312f31312f67625870564d734e6a4a50375446522e706e67-20210611123522235.png" alt="image-20201231102704386"></p>
+<hr>
+<blockquote>
+<p>缓存击穿问题：</p>
+<p>原因：缓存中的热点数据，在Redis中的缓存突然到期了，造成了大量请求都去访问数据库，造成数据库宕机</p>
+<p>解决方案：</p>
+<ol>
+<li>添加一个锁，在访问数据时，如果缓存中不存在，就只能允许有限个请求去访问数据库，避免数据库宕机（推荐，后面还有分布式锁）</li>
+<li>对于热点数据不设置生存时间（不推荐）</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>缓存雪崩问题：</p>
+<p>原因：当大量缓存同时到期时，如果有大量的请求同时访问数据，会导致数据库宕机</p>
+<p>解决方案：</p>
+<ol>
+<li>将缓存中数据的生存时间，设置为30min-60min的随机时间</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>缓存倾斜问题：</p>
+<p>原因：大量热点数据放在了一个Redis节点上，导致Redis节点无法承受住大量的请求而宕机</p>
+<p>解决方案：</p>
+<ol>
+<li>扩展主从架构，搭建大量的从节点，缓解Redis的压力（比较昂贵）</li>
+<li>可以在Tomcat中加JVM缓存，在查询Redis之前，先查询Tomcat中的缓存</li>
+</ol>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">LittleY</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2021/06/11/redis-bi-ji/">http://example.com/2021/06/11/redis-bi-ji/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">LittleY</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的支持是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '639fdc00bfdf55a93f93',
+        clientSecret: 'a513a7db9f90c5801c8a946db5bb6abce7930978',
+        repo: 'littley98.github.io',
+        owner: 'LittleY98',
+        admin: ["LittleY98"],
+        id: '2021-06-11T12-39-22',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/06/11/redis-bi-ji/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Redis笔记">
+                        
+                        <span class="card-title">Redis笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/05/22/mysql-zong-ti-gai-shu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="MySQL总体概述">
+                        
+                        <span class="card-title">MySQL总体概述</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: LittleY&#39;Blog<br />'
+            + '文章作者: LittleY<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">LittleY</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/littley98" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:yangxun1998@foxmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181475466" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181475466" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>
